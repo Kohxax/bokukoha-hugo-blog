@@ -7,14 +7,60 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <copyright>Koha</copyright>
-        <lastBuildDate>Wed, 19 Feb 2025 11:26:45 +0000</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Hello World</title>
-        <link>http://localhost:1313/p/hello-world/</link>
-        <pubDate>Wed, 19 Feb 2025 11:26:45 +0000</pubDate>
+        <lastBuildDate>Wed, 19 Feb 2025 21:25:35 +0900</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ブログ作った</title>
+        <link>http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/</link>
+        <pubDate>Wed, 19 Feb 2025 21:25:35 +0900</pubDate>
         
-        <guid>http://localhost:1313/p/hello-world/</guid>
-        <description>&lt;img src="http://localhost:1313/p/hello-world/main.jpg" alt="Featured image of post Hello World" /&gt;&lt;h2 id=&#34;heading&#34;&gt;heading
-&lt;/h2&gt;&lt;p&gt;Hello World!&lt;/p&gt;
+        <guid>http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/main.jpg" alt="Featured image of post ブログ作った" /&gt;&lt;h2 id=&#34;ブログ作りました&#34;&gt;ブログ作りました
+&lt;/h2&gt;&lt;p&gt;前々から作る作るって言って作ってなかったブログをついに完成させました。とはいっても、こういうところに投稿できるほどのたいそうな人生を送っているわけでもないので、misskeyやtwitterに上げてない写真だとか、日常の出来事がメインの日記的な運用になると思います。&lt;/p&gt;
+&lt;p&gt;たまには技術的なことを書いたりするかも。自鯖のこととか。そこらへんはタグで色々分けられたらいいな。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/%E6%A8%99%E8%AD%98.jpg&#34;
+	width=&#34;1536&#34;
+	height=&#34;2048&#34;
+	srcset=&#34;http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/%E6%A8%99%E8%AD%98_hu_1517bc286af0c96d.jpg 480w, http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/%E6%A8%99%E8%AD%98_hu_1a6d3d16d25a51ca.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;曲がってる標識&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;75&#34;
+		data-flex-basis=&#34;180px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;↑こんな感じに。画像のサイズ変更とかに関しては俺のmarkdownに関する知識不足でよくわからないので、そのうちやります。しばらくはクソデカ写真でも許してほしい。&lt;/p&gt;
+&lt;h3 id=&#34;何書くのっていう&#34;&gt;何書くのっていう
+&lt;/h3&gt;&lt;p&gt;実際これが本当に難しいと思う。まあ大半の人はわかると思うけど、俺は重度テキスト投稿SNS依存症なので、日常の1つ1つの出来事を全部呟いちゃうですよね。文章を書くの自体は二次創作小説書くくらいには好きだったりはする（読みやすいかどうかは謎）けども、日記みたいに文章をまとめて書くのは長続きしないのはだめかも。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/sns.jpg&#34;
+	width=&#34;463&#34;
+	height=&#34;213&#34;
+	srcset=&#34;http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/sns_hu_521de45448e1ee43.jpg 480w, http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/sns_hu_a35ab524b476c499.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;SNS依存症の図&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;217&#34;
+		data-flex-basis=&#34;521px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;せっかく頑張って作ったし、色々カスタマイズしていく予定ではあるので、このブログは頑張って続けられるように頑張るぞ！&lt;/p&gt;
+&lt;h2 id=&#34;ちょっと技術的な話&#34;&gt;ちょっと技術的な話
+&lt;/h2&gt;&lt;p&gt;このブログサイト、Hugo + 転がってた素敵なstackって名前のテーマで作ったんですが、なんせ初めてやったことだったので色々詰まることが多かったです。開発環境はProxmox上でubuntu 22.04突っ込んだLXC建ててやってたんですが、あとから考えてみれば別にwindowsのメイン機で開発してもなんも変わらんかったな…と。&lt;/p&gt;
+&lt;p&gt;ビルドとデプロイはCloudflare Pages君に任せています。ガチでCloudflareに足向けて寝られない。&lt;/p&gt;
+&lt;h3 id=&#34;詰まったポイント&#34;&gt;詰まったポイント
+&lt;/h3&gt;&lt;p&gt;Hugoとかの方に関してはそのうち別記事を書こうと思うんですが、Cloudflare Pagesで詰まったところを備忘録として簡単に残します。&lt;/p&gt;
+&lt;p&gt;Cloudflare PagesではHugo製にしてもなんにしても公開前にビルドをすることになるんですが、今回一度そこで詰まりました。LXCの開発環境の方ではテーマであるstackどーたらで要求されているHugoの&lt;code&gt;v0.123.0&lt;/code&gt;より上、執筆当時最新版である&lt;code&gt;v0.144.1&lt;/code&gt;を使っていたんですが、なんとCloudflare pagesくんのHugoはデフォルトだとバージョンが98だかなんだかで、要求バージョンに全く届かないんですよね。というので最初にビルド通そうとしたら普通に通らずに頭を抱えてしまいました。&lt;/p&gt;
+&lt;p&gt;まあとはいっても大した問題ではなくて、Googleで「Cloudflare pages hugo」とかでググったら直ぐに解決方法がわかったのは助かったかも。Cloudflare Pagesの&lt;a href=&#34;https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/&#34;&gt;公式Doc&lt;/a&gt;に&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Use a specific or newer Hugo version&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;とかいう俺のためとしか思えない項目があり、それによればページビルド前の環境変数の設定部分で&lt;code&gt;HUGO_VERSION&lt;/code&gt;という変数名と使いたいバージョンを指定してあげることで特定バージョンでビルドを実行できるらしいです。実際これだけで解決して、無事ビルドもデプロイもできました。&lt;/p&gt;
+&lt;h2 id=&#34;おわりに&#34;&gt;おわりに
+&lt;/h2&gt;&lt;p&gt;デザインが気に入ってるのもあってかなりモチベは高いので、とにかく継続したい！2025のこはの目標は継続です。日常の話もお出かけの話も、つまらない技術関係の話も色々したいです。&lt;/p&gt;
+&lt;p&gt;ここまで読んでくれてありがとうございます。また次回👋&lt;/p&gt;
 </description>
         </item>
         
