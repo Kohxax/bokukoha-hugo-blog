@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on Bokukoha-Blog</title>
-        <link>//ind:1313/post/</link>
-        <description>Recent content in Posts on Bokukoha-Blog</description>
+        <title>Posts on Koha Blog</title>
+        <link>http://localhost:1313/post/</link>
+        <description>Recent content in Posts on Koha Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
-        <lastBuildDate>Wed, 19 Feb 2025 09:12:15 +0000</lastBuildDate><atom:link href="//ind:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>Koha</copyright>
+        <lastBuildDate>Wed, 19 Feb 2025 11:26:45 +0000</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Hello World</title>
-        <link>//ind:1313/post/hello-world/</link>
-        <pubDate>Wed, 19 Feb 2025 09:12:15 +0000</pubDate>
+        <link>http://localhost:1313/p/hello-world/</link>
+        <pubDate>Wed, 19 Feb 2025 11:26:45 +0000</pubDate>
         
-        <guid>//ind:1313/post/hello-world/</guid>
-        <description></description>
+        <guid>http://localhost:1313/p/hello-world/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hello-world/main.jpg" alt="Featured image of post Hello World" /&gt;&lt;h2 id=&#34;heading&#34;&gt;heading
+&lt;/h2&gt;&lt;p&gt;Hello World!&lt;/p&gt;
+</description>
         </item>
         
     </channel>

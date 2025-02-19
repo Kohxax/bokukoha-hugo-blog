@@ -194,6 +194,13 @@ menu:
           url: https://x.com/kohxax
           params:
               icon: brand-twitter
+              
+        - identifier: misskey
+          name: Misskey
+          url: https://misskey.io/@bokukoha
+          params:
+              icon: misskey
+              
 
 related:
     includeNewer: true
