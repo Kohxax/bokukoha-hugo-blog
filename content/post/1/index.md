@@ -36,7 +36,7 @@ Hugoとかの方に関してはそのうち別記事を書こうと思うんで�
 
 Cloudflare PagesではHugo製にしてもなんにしても公開前にビルドをすることになるんですが、今回一度そこで詰まりました。LXCの開発環境の方ではテーマであるstackどーたらで要求されているHugoの`v0.123.0`より上、執筆当時最新版である`v0.144.1`を使っていたんですが、なんとCloudflare pagesくんのHugoはデフォルトだとバージョンが98だかなんだかで、要求バージョンに全く届かないんですよね。というので最初にビルド通そうとしたら普通に通らずに頭を抱えてしまいました。
 
-まあとはいっても大した問題ではなくて、Googleで「Cloudflare pages hugo」とかでググったら直ぐに解決方法がわかったのは助かったかも。Cloudflare Pagesの<a href="https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/">公式Doc</a>に 
+まあとはいっても大した問題ではなくて、Googleで「Cloudflare pages hugo」とかでググったら直ぐに解決方法がわかったのは助かったかも。Cloudflare Pagesの[公式Doc](https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/)に 
 >Use a specific or newer Hugo version
 
 とかいう俺のためとしか思えない項目があり、それによればページビルド前の環境変数の設定部分で`HUGO_VERSION`という変数名と使いたいバージョンを指定してあげることで特定バージョンでビルドを実行できるらしいです。実際これだけで解決して、無事ビルドもデプロイもできました。

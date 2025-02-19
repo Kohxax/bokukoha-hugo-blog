@@ -32,7 +32,7 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;↑こんな感じに。画像のサイズ変更とかに関しては俺のmarkdownに関する知識不足でよくわからないので、そのうちやります。しばらくはクソデカ写真でも許してほしい。&lt;/p&gt;
 &lt;h3 id=&#34;何書くのっていう&#34;&gt;何書くのっていう
-&lt;/h3&gt;&lt;p&gt;実際これが本当に難しいと思う。まあ大半の人はわかると思うけど、俺は重度テキスト投稿SNS依存症なので、日常の1つ1つの出来事を全部呟いちゃうですよね。文章を書くの自体は二次創作小説書くくらいには好きだったりはする（読みやすいかどうかは謎）けども、日記みたいに文章をまとめて書くのは長続きしないのはだめかも。&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;実際これが本当に難しいと思う。まあ大半の人はわかると思うけど、俺は重度テキスト投稿SNS依存症なので、日常の1つ1つの出来事を全部呟いちゃうんですよね。文章を書くの自体は二次創作小説書くくらいには好きだったりはする（読みやすいかどうかは謎）けども、日記みたいに文章をまとめて書くのは長続きしないのでだめかも。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/sns.jpg&#34;
 	width=&#34;463&#34;
 	height=&#34;213&#34;
@@ -47,14 +47,15 @@
 		data-flex-basis=&#34;521px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;せっかく頑張って作ったし、色々カスタマイズしていく予定ではあるので、このブログは頑張って続けられるように頑張るぞ！&lt;/p&gt;
+&lt;p&gt;せっかく頑張って作ったし、色々カスタマイズしていく予定ではあるので、このブログは頑張って続けられるようにするぞ！！&lt;/p&gt;
 &lt;h2 id=&#34;ちょっと技術的な話&#34;&gt;ちょっと技術的な話
 &lt;/h2&gt;&lt;p&gt;このブログサイト、Hugo + 転がってた素敵なstackって名前のテーマで作ったんですが、なんせ初めてやったことだったので色々詰まることが多かったです。開発環境はProxmox上でubuntu 22.04突っ込んだLXC建ててやってたんですが、あとから考えてみれば別にwindowsのメイン機で開発してもなんも変わらんかったな…と。&lt;/p&gt;
 &lt;p&gt;ビルドとデプロイはCloudflare Pages君に任せています。ガチでCloudflareに足向けて寝られない。&lt;/p&gt;
 &lt;h3 id=&#34;詰まったポイント&#34;&gt;詰まったポイント
 &lt;/h3&gt;&lt;p&gt;Hugoとかの方に関してはそのうち別記事を書こうと思うんですが、Cloudflare Pagesで詰まったところを備忘録として簡単に残します。&lt;/p&gt;
 &lt;p&gt;Cloudflare PagesではHugo製にしてもなんにしても公開前にビルドをすることになるんですが、今回一度そこで詰まりました。LXCの開発環境の方ではテーマであるstackどーたらで要求されているHugoの&lt;code&gt;v0.123.0&lt;/code&gt;より上、執筆当時最新版である&lt;code&gt;v0.144.1&lt;/code&gt;を使っていたんですが、なんとCloudflare pagesくんのHugoはデフォルトだとバージョンが98だかなんだかで、要求バージョンに全く届かないんですよね。というので最初にビルド通そうとしたら普通に通らずに頭を抱えてしまいました。&lt;/p&gt;
-&lt;p&gt;まあとはいっても大した問題ではなくて、Googleで「Cloudflare pages hugo」とかでググったら直ぐに解決方法がわかったのは助かったかも。Cloudflare Pagesの&lt;a href=&#34;https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/&#34;&gt;公式Doc&lt;/a&gt;に&lt;/p&gt;
+&lt;p&gt;まあとはいっても大した問題ではなくて、Googleで「Cloudflare pages hugo」とかでググったら直ぐに解決方法がわかったのは助かったかも。Cloudflare Pagesの&lt;a class=&#34;link&#34; href=&#34;https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;公式Doc&lt;/a&gt;に&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Use a specific or newer Hugo version&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;とかいう俺のためとしか思えない項目があり、それによればページビルド前の環境変数の設定部分で&lt;code&gt;HUGO_VERSION&lt;/code&gt;という変数名と使いたいバージョンを指定してあげることで特定バージョンでビルドを実行できるらしいです。実際これだけで解決して、無事ビルドもデプロイもできました。&lt;/p&gt;
@@ -78,7 +79,16 @@
         
         <guid>http://localhost:1313/about/</guid>
         <description>&lt;h2 id=&#34;自己紹介&#34;&gt;自己紹介
-&lt;/h2&gt;&lt;p&gt;こはです。20歳学生です。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;こはです。大学生をしています。趣味はゲームと散歩と飲酒と自宅サーバーです。&lt;br&gt;
+このブログでは他SNSに載せていないような詳しい日常のことや、技術系の挑戦について投稿します。&lt;/p&gt;
+&lt;p&gt;やっているゲームやハマっているジャンルなどの詳しいプロフィールは&lt;a class=&#34;link&#34; href=&#34;https://www.bokukoha.dev/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;自鯖プロフサイト&lt;/a&gt;をご覧ください。&lt;/p&gt;
+&lt;h2 id=&#34;連絡先--sns-リスト&#34;&gt;連絡先 &amp;amp; SNS リスト
+&lt;/h2&gt;&lt;p&gt;プロフの下にも書いてありますが、一応SNSのアカウントリストを共有します。趣味があったらフォロー等してくれると嬉しいです。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://x.com/Kohxax&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Twitter&lt;/a&gt; &lt;br&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://misskey.io/@bokukoha&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Misskey.io&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
