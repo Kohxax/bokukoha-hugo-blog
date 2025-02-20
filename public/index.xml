@@ -7,7 +7,194 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <copyright>Koha</copyright>
-        <lastBuildDate>Wed, 19 Feb 2025 21:25:35 +0900</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 20 Feb 2025 00:32:03 +0900</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hugo &#43; Stackテーマで楽に作る個人ブログ</title>
+        <link>http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/</link>
+        <pubDate>Thu, 20 Feb 2025 00:32:03 +0900</pubDate>
+        
+        <guid>http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/main.jpg" alt="Featured image of post Hugo &#43; Stackテーマで楽に作る個人ブログ" /&gt;&lt;h2 id=&#34;はじめに&#34;&gt;はじめに
+&lt;/h2&gt;&lt;p&gt;この記事では弊ブログサイトを作るにあたって参考にした記事や公式ドキュメントを紹介する。誰でもわかりやすいような解説を目指すが、あくまでも備忘録であるため個別の質問等には応じられない可能性がある。&lt;/p&gt;
+&lt;p&gt;Hugo + jimmy氏作のStack themeを使用してブログページを作り、windows11のVisual Studio Codeからgithubのレポジトリにcommit&amp;amp;push、そしてcloudflare pagesでビルドとデプロイをすること目標としているものと想定して解説をする。&lt;/p&gt;
+&lt;h2 id=&#34;目次&#34;&gt;目次
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;筆者の環境&lt;/li&gt;
+&lt;li&gt;開発環境&lt;/li&gt;
+&lt;li&gt;Hugoのインストール&lt;/li&gt;
+&lt;li&gt;Hugoでプロジェクト作成&lt;/li&gt;
+&lt;li&gt;テーマ追加&lt;/li&gt;
+&lt;li&gt;投稿作成&lt;/li&gt;
+&lt;li&gt;その他&lt;/li&gt;
+&lt;li&gt;Cloudflare Pagesでの設定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;筆者の環境&#34;&gt;筆者の環境
+&lt;/h2&gt;&lt;p&gt;・Cloudflareでドメイン取得済み &lt;br&gt;
+・メインPCのOSはWindows11 &lt;br&gt;
+・webアプリの知識は皆無（jsすらわからない） &lt;br&gt;
+・Cloudflare tunnelやpagesはある程度の利用経験あり
+・linux及びwindowsの最低限のコマンド知識はあり（ディレクトリ移動やnano、touchなど）&lt;/p&gt;
+&lt;h2 id=&#34;開発環境&#34;&gt;開発環境
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;結論 : Windows使ってるならWindowsで作ろう&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当初は自鯖でホスティングしようと思っていたため、Proxmox上にLXCを建てて開発環境を作った。しかし、結局Cloudflare Pagesを利用したため、開発環境はWindows11（x64）で作るものとする。 &lt;br&gt;
+Cloudflare Pagesを使わずにgithubのwebhookを使ってビルドとデプロイを自動化するスクリプト書こうと思えるなら話は違うけど、楽に作るならcloudflare pagesがオススメ。&lt;/p&gt;
+&lt;h2 id=&#34;hugoのインストール&#34;&gt;Hugoのインストール
+&lt;/h2&gt;&lt;p&gt;基本的にHugoの&lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/installation/windows/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Windows用公式Doc&lt;/a&gt;に沿って書くだけなので、これが読めてわかる人は読み飛ばしてもらっても問題ないかも。&lt;/p&gt;
+&lt;h3 id=&#34;前提条件&#34;&gt;前提条件
+&lt;/h3&gt;&lt;p&gt;Hugoをインストールする前に、いくつか必要になるものがあるためそれらをインストールする。&lt;/p&gt;
+&lt;h4 id=&#34;gitのインストール&#34;&gt;gitのインストール
+&lt;/h4&gt;&lt;p&gt;①まずgitの&lt;a class=&#34;link&#34; href=&#34;https://git-scm.com/downloads&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ダウンロードページ&lt;/a&gt;にアクセスする。&lt;/p&gt;
+&lt;p&gt;②&lt;strong&gt;Windows&lt;/strong&gt;を選択する&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/git-ins1.jpg&#34;
+	width=&#34;1048&#34;
+	height=&#34;392&#34;
+	srcset=&#34;http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/git-ins1_hu_8be31f0fb8eba42e.jpg 480w, http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/git-ins1_hu_2c435a93686af5b.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;267&#34;
+		data-flex-basis=&#34;641px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;③&lt;strong&gt;64-bit Git for Windows Setup&lt;/strong&gt;を選択する。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/git-ins2.jpg&#34;
+	width=&#34;737&#34;
+	height=&#34;378&#34;
+	srcset=&#34;http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/git-ins2_hu_dbc64d666dc601db.jpg 480w, http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/git-ins2_hu_f1db83160f6d304f.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;194&#34;
+		data-flex-basis=&#34;467px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;④ダウンロードされた&lt;code&gt;Git-x.xx.x-64-bit.exe&lt;/code&gt;を起動し、gitをインストールする。&lt;/p&gt;
+&lt;p&gt;⑤windowsのコンソールで&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;と入力し、&lt;code&gt;git version x.xx.x&lt;/code&gt;の様な出力が得られればOK。&lt;/p&gt;
+&lt;h4 id=&#34;goのインストール&#34;&gt;Goのインストール
+&lt;/h4&gt;&lt;p&gt;①Goのインストーラー&lt;a class=&#34;link&#34; href=&#34;https://go.dev/dl/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ダウンロードページ&lt;/a&gt;にアクセスする。&lt;/p&gt;
+&lt;p&gt;②Stable versionsリスト内から&lt;code&gt;gox.xx.x.windows-amd64.msi&lt;/code&gt;を探してダウンロードする。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/go-ins1.jpg&#34;
+	width=&#34;1234&#34;
+	height=&#34;700&#34;
+	srcset=&#34;http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/go-ins1_hu_fede91896fe0c25e.jpg 480w, http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/go-ins1_hu_3128169e66c3e27e.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;176&#34;
+		data-flex-basis=&#34;423px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;③ダウンロードしたインストーラーを起動し、Goをインストールする。&lt;/p&gt;
+&lt;p&gt;④Gitと同様にWindowsのコンソールで&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;go version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;と入力し、&lt;code&gt;go version gox.xx.x windows/amd64&lt;/code&gt;の様な出力が得られればOK。&lt;/p&gt;
+&lt;h4 id=&#34;dart-sassのインストール&#34;&gt;Dart Sassのインストール
+&lt;/h4&gt;&lt;p&gt;①Dart Sassの&lt;a class=&#34;link&#34; href=&#34;https://github.com/sass/dart-sass/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;公式GitHubリリースページ&lt;/a&gt;にアクセスする。&lt;/p&gt;
+&lt;p&gt;②最新バージョンのリリースからWindows用のzipファイル（例&lt;code&gt;dart-sass-1.85.0-windows-x64.zip&lt;/code&gt;）を探してダウンロードする。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/dartsass-ins1.jpg&#34;
+	width=&#34;975&#34;
+	height=&#34;198&#34;
+	srcset=&#34;http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/dartsass-ins1_hu_b96dddd4a3d439d2.jpg 480w, http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/dartsass-ins1_hu_f9b07877bcf87a8.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;492&#34;
+		data-flex-basis=&#34;1181px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;③ダウンロードしたzipファイルを解凍し、中身の&lt;code&gt;dart-sass&lt;/code&gt;フォルダをわかりやすい場所（例 Cドライブ直下等）に配置する。&lt;/p&gt;
+&lt;p&gt;③Windowsの検索メニューから&lt;strong&gt;環境変数を編集&lt;/strong&gt;のウィンドウを開く。&lt;/p&gt;
+&lt;p&gt;④ウィンドウ内のユーザー環境変数 or システム環境変数から&lt;code&gt;Path&lt;/code&gt;を選択し&lt;strong&gt;編集&lt;/strong&gt;をクリックする。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/dartsass-ins2.jpg&#34;
+	width=&#34;241&#34;
+	height=&#34;161&#34;
+	srcset=&#34;http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/dartsass-ins2_hu_237d9c8f3a4bf5f4.jpg 480w, http://localhost:1313/p/hugo--stack%E3%83%86%E3%83%BC%E3%83%9E%E3%81%A7%E6%A5%BD%E3%81%AB%E4%BD%9C%E3%82%8B%E5%80%8B%E4%BA%BA%E3%83%96%E3%83%AD%E3%82%B0/dartsass-ins2_hu_d20cbd95e4576e58.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;149&#34;
+		data-flex-basis=&#34;359px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;⑤&lt;strong&gt;新規&lt;/strong&gt;をクリックし、入力を求められている部分に②で配置したdart-sassフォルダのパスを入力する。（例 Cドライブ直下に配置していた場合は、&lt;code&gt;C:\dart-sass&lt;/code&gt;）&lt;/p&gt;
+&lt;p&gt;⑥前述の2つと同様に、Windowsのコンソールで&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sass --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;と入力しｍ&lt;code&gt;x.xx.x&lt;/code&gt;の様な出力が得られればOK。&lt;/p&gt;
+&lt;h3 id=&#34;hugo本体のインストール&#34;&gt;Hugo本体のインストール
+&lt;/h3&gt;&lt;p&gt;前述の前提条件が全て揃っていることが確認出来たら、いよいよHugo本体をインストールする。&lt;/p&gt;
+&lt;p&gt;とはいってもこれは簡単で、Windowsのコンソールで&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;winget install Hugo.Hugo.Extended
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;と入力するだけでOK。特に問題が無ければ無事インストールが完了するはず。&lt;/p&gt;
+&lt;p&gt;インストール終了後は、前提条件同様にコンソールで&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hugo version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;と入力し、出力が得られることを確認することを忘れずに。&lt;/p&gt;
+&lt;h4 id=&#34;注意事項&#34;&gt;注意事項
+&lt;/h4&gt;&lt;p&gt;前項で得られたバージョン出力が&lt;code&gt;0.123.0&lt;/code&gt;より大きい数字であることを必ず確認すること。&lt;code&gt;0.123.0&lt;/code&gt;はこの後導入するStackテーマが動作する最低バージョンであるため、これが小さい数字になっているとテーマがうまく動作しなくなる。&lt;/p&gt;
+&lt;h2 id=&#34;hugoでプロジェクト作成&#34;&gt;Hugoでプロジェクト作成
+&lt;/h2&gt;&lt;p&gt;①ブログを作りたいディレクトリ内（例 Cドライブ直下）でコンソールで&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;hugo new site your_blog_name
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;と入力しよう。すると&lt;code&gt;C\:your_blog_name&lt;/code&gt;というHugoのプロジェクトフォルダが作成される。&lt;code&gt;your_blog_name&lt;/code&gt;は任意の名前に変えること。&lt;/p&gt;
+&lt;p&gt;②&lt;/p&gt;
+&lt;h2 id=&#34;テーマ追加&#34;&gt;テーマ追加
+&lt;/h2&gt;&lt;h2 id=&#34;投稿作成&#34;&gt;投稿作成
+&lt;/h2&gt;&lt;h3 id=&#34;投稿テンプレートの作成&#34;&gt;投稿テンプレートの作成
+&lt;/h3&gt;&lt;h2 id=&#34;その他&#34;&gt;その他
+&lt;/h2&gt;&lt;h2 id=&#34;cloudflare-pagesでの設定&#34;&gt;Cloudflare Pagesでの設定
+&lt;/h2&gt;</description>
+        </item>
+        <item>
         <title>ブログ作った</title>
         <link>http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/</link>
         <pubDate>Wed, 19 Feb 2025 21:25:35 +0900</pubDate>

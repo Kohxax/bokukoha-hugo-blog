@@ -7,7 +7,16 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <copyright>Koha</copyright>
-        <lastBuildDate>Wed, 19 Feb 2025 21:25:35 +0900</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 20 Feb 2025 09:48:04 +0900</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hugo Blog</title>
+        <link>http://localhost:1313/p/hugo-blog/</link>
+        <pubDate>Thu, 20 Feb 2025 09:48:04 +0900</pubDate>
+        
+        <guid>http://localhost:1313/p/hugo-blog/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hugo-blog/main.jpg" alt="Featured image of post Hugo Blog" /&gt;&lt;h2 id=&#34;heading&#34;&gt;heading
+&lt;/h2&gt;</description>
+        </item>
+        <item>
         <title>ブログ作った</title>
         <link>http://localhost:1313/p/%E3%83%96%E3%83%AD%E3%82%B0%E4%BD%9C%E3%81%A3%E3%81%9F/</link>
         <pubDate>Wed, 19 Feb 2025 21:25:35 +0900</pubDate>
@@ -54,7 +63,8 @@
 &lt;h3 id=&#34;詰まったポイント&#34;&gt;詰まったポイント
 &lt;/h3&gt;&lt;p&gt;Hugoとかの方に関してはそのうち別記事を書こうと思うんですが、Cloudflare Pagesで詰まったところを備忘録として簡単に残します。&lt;/p&gt;
 &lt;p&gt;Cloudflare PagesではHugo製にしてもなんにしても公開前にビルドをすることになるんですが、今回一度そこで詰まりました。LXCの開発環境の方ではテーマであるstackどーたらで要求されているHugoの&lt;code&gt;v0.123.0&lt;/code&gt;より上、執筆当時最新版である&lt;code&gt;v0.144.1&lt;/code&gt;を使っていたんですが、なんとCloudflare pagesくんのHugoはデフォルトだとバージョンが98だかなんだかで、要求バージョンに全く届かないんですよね。というので最初にビルド通そうとしたら普通に通らずに頭を抱えてしまいました。&lt;/p&gt;
-&lt;p&gt;まあとはいっても大した問題ではなくて、Googleで「Cloudflare pages hugo」とかでググったら直ぐに解決方法がわかったのは助かったかも。Cloudflare Pagesの&lt;a href=&#34;https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/&#34;&gt;公式Doc&lt;/a&gt;に&lt;/p&gt;
+&lt;p&gt;まあとはいっても大した問題ではなくて、Googleで「Cloudflare pages hugo」とかでググったら直ぐに解決方法がわかったのは助かったかも。Cloudflare Pagesの&lt;a class=&#34;link&#34; href=&#34;https://developers.cloudflare.com/pages/framework-guides/deploy-a-hugo-site/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;公式Doc&lt;/a&gt;に&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Use a specific or newer Hugo version&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;とかいう俺のためとしか思えない項目があり、それによればページビルド前の環境変数の設定部分で&lt;code&gt;HUGO_VERSION&lt;/code&gt;という変数名と使いたいバージョンを指定してあげることで特定バージョンでビルドを実行できるらしいです。実際これだけで解決して、無事ビルドもデプロイもできました。&lt;/p&gt;
