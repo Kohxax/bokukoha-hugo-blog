@@ -4,9 +4,9 @@ date: {{ .Date }}
 draft: true
 image: 'main.jpg'
 categories:
-  - Tech
+  - 雑記
 tags:
-  - tag
+  - 日記
 ---
 
 ## heading
