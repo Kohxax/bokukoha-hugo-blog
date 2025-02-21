@@ -7,20 +7,76 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <copyright>Koha</copyright>
-        <lastBuildDate>Thu, 20 Feb 2025 09:48:04 +0900</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Tag</title>
-        <link>http://localhost:1313/tags/tag/</link>
-        <pubDate>Thu, 20 Feb 2025 09:48:04 +0900</pubDate>
+        <lastBuildDate>Fri, 21 Feb 2025 09:57:06 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>お出かけ</title>
+        <link>http://localhost:1313/tags/%E3%81%8A%E5%87%BA%E3%81%8B%E3%81%91/</link>
+        <pubDate>Fri, 21 Feb 2025 09:57:06 +0000</pubDate>
         
-        <guid>http://localhost:1313/tags/tag/</guid>
+        <guid>http://localhost:1313/tags/%E3%81%8A%E5%87%BA%E3%81%8B%E3%81%91/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>散歩</title>
+        <link>http://localhost:1313/tags/%E6%95%A3%E6%AD%A9/</link>
+        <pubDate>Fri, 21 Feb 2025 09:57:06 +0000</pubDate>
+        
+        <guid>http://localhost:1313/tags/%E6%95%A3%E6%AD%A9/</guid>
         <description></description>
         </item>
         <item>
         <title>日記</title>
         <link>http://localhost:1313/tags/%E6%97%A5%E8%A8%98/</link>
-        <pubDate>Wed, 19 Feb 2025 21:25:35 +0900</pubDate>
+        <pubDate>Fri, 21 Feb 2025 09:57:06 +0000</pubDate>
         
         <guid>http://localhost:1313/tags/%E6%97%A5%E8%A8%98/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Cloudflare</title>
+        <link>http://localhost:1313/tags/cloudflare/</link>
+        <pubDate>Thu, 20 Feb 2025 00:32:03 +0900</pubDate>
+        
+        <guid>http://localhost:1313/tags/cloudflare/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>DartSass</title>
+        <link>http://localhost:1313/tags/dartsass/</link>
+        <pubDate>Thu, 20 Feb 2025 00:32:03 +0900</pubDate>
+        
+        <guid>http://localhost:1313/tags/dartsass/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Git</title>
+        <link>http://localhost:1313/tags/git/</link>
+        <pubDate>Thu, 20 Feb 2025 00:32:03 +0900</pubDate>
+        
+        <guid>http://localhost:1313/tags/git/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Go</title>
+        <link>http://localhost:1313/tags/go/</link>
+        <pubDate>Thu, 20 Feb 2025 00:32:03 +0900</pubDate>
+        
+        <guid>http://localhost:1313/tags/go/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Hugo</title>
+        <link>http://localhost:1313/tags/hugo/</link>
+        <pubDate>Thu, 20 Feb 2025 00:32:03 +0900</pubDate>
+        
+        <guid>http://localhost:1313/tags/hugo/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Stack Theme</title>
+        <link>http://localhost:1313/tags/stack-theme/</link>
+        <pubDate>Thu, 20 Feb 2025 00:32:03 +0900</pubDate>
+        
+        <guid>http://localhost:1313/tags/stack-theme/</guid>
         <description></description>
         </item>
         
