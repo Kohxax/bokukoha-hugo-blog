@@ -7,7 +7,155 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <copyright>Koha</copyright>
-        <lastBuildDate>Fri, 21 Feb 2025 09:57:06 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 22 Feb 2025 05:10:14 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>3万円くらいで作る自宅サーバー</title>
+        <link>http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/</link>
+        <pubDate>Sat, 22 Feb 2025 05:10:14 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/</guid>
+        <description>&lt;img src="http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/main.jpg" alt="Featured image of post 3万円くらいで作る自宅サーバー" /&gt;&lt;p&gt;2024年の夏頃に適当にパーツをかき集めてサーバー用のPCを組み、以降なんだかんだでずっと使い続けているのでそれの日記みたいな感じです。特に技術的な話はしませんが、一応技術カテゴリにしました。&lt;/p&gt;
+&lt;h2 id=&#34;経緯&#34;&gt;経緯
+&lt;/h2&gt;&lt;p&gt;そもそも一般家庭にサーバー用PCは必要ないだろっていうのはまあ正論なんですが、でもやっぱ欲しいじゃんね、自宅サーバー。
+まあそういう一部男のロマンみたいな話は置いておいて、一応ちゃんと目的はありました。&lt;/p&gt;
+&lt;p&gt;もともとMinecraftというゲームのマルチプレイのサーバーを、友達と遊ぶためにメインのwindows11のPCでちょくちょくホストしていました。ただ、ゲーミングPCを24時間稼働させることは電気代もかかるしなんか光っていて親に色々聞かれるしで面倒だったんですよね。とにかく面倒ごとを避けたいってのと、raspberry piをいじいじする中でLinuxいじりはもっとやってみたいなと思うようになったので、サーバー作るか！ってことで作りました。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/1.jpg&#34;
+	width=&#34;3514&#34;
+	height=&#34;3533&#34;
+	srcset=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/1_hu_4fb26f10859d695c.jpg 480w, http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/1_hu_a6a0a6c802dcb443.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;なんか壊れたラズパイ4&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;99&#34;
+		data-flex-basis=&#34;238px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;自宅サーバーのハードルは意外と低い&#34;&gt;自宅サーバーのハードルは意外と低い
+&lt;/h2&gt;&lt;p&gt;サーバーっていうと大企業のデータセンターとかみたいな凄いのを想像する人が多いと思うんですが、自宅にサーバー1台置くだけならハードルはかなり低いです。自分でPC作れるくらいの知識は要りますけど、まあそこは気合でなんとかしろってことで。&lt;/p&gt;
+&lt;h2 id=&#34;パーツ集め-貧乏人ver&#34;&gt;パーツ集め 貧乏人ver.
+&lt;/h2&gt;&lt;p&gt;ここが一番難航しました。とにかくお金がないので、安く・ある程度高性能っていう条件を満たすCPUを適当に選定しました。本当ならXeonとかみたいなサーバー用CPUがいいんでしょうけど、今回はメルカリで4,000円とかだった&lt;a class=&#34;link&#34; href=&#34;https://www.intel.co.jp/content/www/jp/ja/products/sku/88195/intel-core-i76700k-processor-8m-cache-up-to-4-20-ghz/specifications.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Intel Core i7-6700k&lt;/a&gt;を選びました。&lt;/p&gt;
+&lt;p&gt;4,000円で買えていいCPUじゃないだろ…という。メルカリでよくある動作未確認品のいわゆるCPUガチャではなく、一応動作確認済みがついてるものを買いました。中古なのはそうなんですが、特に問題なく動いてくれて満足。&lt;/p&gt;
+&lt;p&gt;マザボはCPUのソケットに合った&lt;a class=&#34;link&#34; href=&#34;https://www.asrock.com/mb/intel/Z270%20Extreme4/index.jp.asp&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Asrock Z270 Extreme4&lt;/a&gt;をセレクト。こっちもなんとメルカリで動作確認済み3,000円。安すぎる。ありえない話し❗&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/2.jpg&#34;
+	width=&#34;1179&#34;
+	height=&#34;599&#34;
+	srcset=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/2_hu_808817673b1f1748.jpg 480w, http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/2_hu_6e497cfb6ad52f3b.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;神過ぎた&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;196&#34;
+		data-flex-basis=&#34;472px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;メモリはAmazonでいっちゃん安いシリコンパワーのやつを買いました。しかもたった16GB！結局増設することになったので最初から32とか64にすれば良かったかな～とは思いますが、ガチでお金なかったからしゃーない。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.amazon.co.jp/dp/B0BTM1RR9Y&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CPUファン&lt;/a&gt;と&lt;a class=&#34;link&#34; href=&#34;https://www.amazon.co.jp/dp/B08SC38GGH&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ケースファン&lt;/a&gt;はSCYTHEのやつを買いました。安心の虎徹です。&lt;/p&gt;
+&lt;p&gt;ケースもAmazonで一番安いやつ買いました。ガチで一番安いやつしか買ってない。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/3.jpg&#34;
+	width=&#34;533&#34;
+	height=&#34;191&#34;
+	srcset=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/3_hu_cccf1999d3da173c.jpg 480w, http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/3_hu_84d6918f77af2bed.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;これ&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;279&#34;
+		data-flex-basis=&#34;669px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;初心者向けって書いてあるけど、別に初心者向けではない。一応ケースファンついてたけど、3pinだから結局使わなかった。&lt;/p&gt;
+&lt;p&gt;電源（450W）とかSSD（500GB）も当然一番安いやつを買いそろえた結果、全部込みで3.2万とかでPC一台組めました。ゲーミングPCと比べると、まだあまり安くならないグラボとかwindowsとかいうタカスギOSを買う必要がなかったのも安さの秘訣かも。&lt;/p&gt;
+&lt;h2 id=&#34;組み立て編&#34;&gt;組み立て編
+&lt;/h2&gt;&lt;p&gt;特に面白いことはないです！PC組むの自体経験は多少あるので、特に引っかかることはありませんでした。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/4.jpg&#34;
+	width=&#34;4272&#34;
+	height=&#34;4663&#34;
+	srcset=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/4_hu_85d7643de603bf65.jpg 480w, http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/4_hu_e77b9c3ae5e229c5.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;CPUつけて&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;91&#34;
+		data-flex-basis=&#34;219px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/5.jpg&#34;
+	width=&#34;4284&#34;
+	height=&#34;5712&#34;
+	srcset=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/5_hu_dc5e881c5e65ece4.jpg 480w, http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/5_hu_102e2ef021e417fc.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;メモリつけて&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;75&#34;
+		data-flex-basis=&#34;180px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/6.jpg&#34;
+	width=&#34;4942&#34;
+	height=&#34;2713&#34;
+	srcset=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/6_hu_70bff445292530f.jpg 480w, http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/6_hu_d3c5592563757eae.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;クーラーとか色々付けてBIOS起動！&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;182&#34;
+		data-flex-basis=&#34;437px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;os選定&#34;&gt;OS選定
+&lt;/h2&gt;&lt;p&gt;組み立てた当初は&lt;code&gt;Ubuntu Server 24.04 LTS&lt;/code&gt;をとりあえず突っ込みました。ただ、この24.04が絶妙に癖のあるバージョンで色々めんどうでした。&lt;/p&gt;
+&lt;p&gt;最終的にProxmoxを入れることになったけど、最初にわかりやすいUbuntuに触れたのは結果的にはよかったな。RHELとかかっこいいし触ってみたいんだけど、Ubuntuが便利すぎて本当にこれしか使ってない。ProxmoxのVMもLXCもほんと全部Ubuntu、ありがとうUbuntu様。&lt;/p&gt;
+&lt;h2 id=&#34;自宅サーバーはいいぞおじさん自宅サーバーはいいぞ&#34;&gt;自宅サーバーはいいぞおじさん「自宅サーバーはいいぞ」
+&lt;/h2&gt;&lt;p&gt;知り合いにこのおじさんが一人（本人に言ったら怒られそうだけど）いるんですが、自分もこれになりそうで大泣き。実際サーバーが家にできてオンプレ民に仲間入りしたわけですが、いろいろと楽しくて良いです。&lt;/p&gt;
+&lt;p&gt;特にProxmoxは自分にとってほんと革命ともいえる存在で、初心者やらかしみたいなことをしてもVMごとリセットかけてやり直せるのがとても便利です。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/7.jpg&#34;
+	width=&#34;1917&#34;
+	height=&#34;957&#34;
+	srcset=&#34;http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/7_hu_bfdbf4eb7898faf5.jpg 480w, http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/7_hu_702b40b9b5b3cdc7.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;こうしてみると最初に比べて増えたなぁ&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;200&#34;
+		data-flex-basis=&#34;480px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;当初の目的のMinecraftサーバーだけではなく、ホームページだとか別でまた解説するかもしれないですがMisskeyという国産SNSの個人インスタンスだったり、いっぱい建てた！楽しい！&lt;/p&gt;
+&lt;p&gt;組んだPCの方もちゃんと動いてくれていて安心です。24時間起動しっぱなしなので排熱とかだけがかなり心配だったんですが、そもそもCPUへの負荷低すぎて全然大丈夫でした。あとCPUクーラーの虎徹mk3が冷却性能高すぎてすごい。&lt;/p&gt;
+&lt;h2 id=&#34;おわりに&#34;&gt;おわりに
+&lt;/h2&gt;&lt;p&gt;少しでも興味がある人、本当に面白いので自宅にサーバー置こう！電気代しかかかりません！良い遊び道具になりますよ！自分自身まだまだなので、ここから色々と技術力伸ばしていきたいです。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Proxmoxで作るMinecraftサーバー</title>
+        <link>http://localhost:1313/p/proxmox%E3%81%A7%E4%BD%9C%E3%82%8Bminecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/</link>
+        <pubDate>Sat, 22 Feb 2025 04:33:41 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/proxmox%E3%81%A7%E4%BD%9C%E3%82%8Bminecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/</guid>
+        <description>&lt;img src="http://localhost:1313/p/proxmox%E3%81%A7%E4%BD%9C%E3%82%8Bminecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/main.jpg" alt="Featured image of post Proxmoxで作るMinecraftサーバー" /&gt;&lt;p&gt;Proxmoxで作る、とは言ってもProxmox上にUbuntu 22.04LTSでVM作ってその中でPaperを動かすだけなので、そんなに特別なことはやってません。&lt;/p&gt;
+&lt;h2 id=&#34;heading&#34;&gt;heading
+&lt;/h2&gt;</description>
+        </item>
+        <item>
         <title>池袋から飯田橋まで散歩した</title>
         <link>http://localhost:1313/p/%E6%B1%A0%E8%A2%8B%E3%81%8B%E3%82%89%E9%A3%AF%E7%94%B0%E6%A9%8B%E3%81%BE%E3%81%A7%E6%95%A3%E6%AD%A9%E3%81%97%E3%81%9F/</link>
         <pubDate>Fri, 21 Feb 2025 09:57:06 +0000</pubDate>
