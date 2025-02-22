@@ -1,7 +1,7 @@
 ---
 title: '3万円くらいで作る自宅サーバー'
 date: 2025-02-22T05:10:14Z
-draft: true
+draft: false
 image: 'main.jpg'
 categories:
   - 技術系
