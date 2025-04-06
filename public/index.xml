@@ -7,7 +7,380 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <copyright>Koha</copyright>
-        <lastBuildDate>Sat, 22 Feb 2025 05:10:14 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 06 Apr 2025 09:19:35 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Cloudflare tunnelで作るMisskey自鯖</title>
+        <link>http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/</link>
+        <pubDate>Sun, 06 Apr 2025 09:19:35 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/</guid>
+        <description>&lt;img src="http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/main.jpg" alt="Featured image of post Cloudflare tunnelで作るMisskey自鯖" /&gt;&lt;h2 id=&#34;概要&#34;&gt;概要
+&lt;/h2&gt;&lt;p&gt;タイトル通りです。言っちゃえばMisskey公式ドキュメントの&lt;a class=&#34;link&#34; href=&#34;https://misskey-hub.net/ja/docs/for-admin/install/guides/docker/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;「Docker Composeを使ったMisskey構築」のページ&lt;/a&gt;をなぞりつつ、僕が詰まった箇所を少し解説するだけなので、公式ドキュメントを読める人はこの記事を読む必要はないと思います。自鯖を動かすうえで絶対に必要な部分だけを解説します。&lt;/p&gt;
+&lt;p&gt;外部公開にはCloudflare tunnelを使います。公式ドキュメントではNginxを使っているはずだからそこだけ異なってるかも。&lt;/p&gt;
+&lt;h2 id=&#34;前提&#34;&gt;前提
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;筆者は非エンジニア&lt;/li&gt;
+&lt;li&gt;サーバーのOSは&lt;code&gt;Ubuntu Server 22.04 LTS&lt;/code&gt;を使った&lt;/li&gt;
+&lt;li&gt;Cloudflareでドメインを取得している&lt;/li&gt;
+&lt;li&gt;コピペができる&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;やってみよう&#34;&gt;やってみよう
+&lt;/h2&gt;&lt;p&gt;ステップを大まかに分けると、&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Misskeyを動かすサーバーの用意&lt;/li&gt;
+&lt;li&gt;Git, Docker, Cloudflaredとかのインストール&lt;/li&gt;
+&lt;li&gt;Cloudflare tunnelの作成&lt;/li&gt;
+&lt;li&gt;Misskeyのリポジトリ取得&lt;/li&gt;
+&lt;li&gt;Configいじり&lt;/li&gt;
+&lt;li&gt;Dockerコンテナの準備&lt;/li&gt;
+&lt;li&gt;初期設定&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;という感じです。下3つは解説通りにやればいいだけなので、一番難易度が高いのはMisskeyを動かすサーバーの用意な気はします。とはいっても、Xserverさんとかがサーバーを安価で提供してくれるので、そういったものを使えば解決するかな？&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/1.jpg&#34;
+	width=&#34;1166&#34;
+	height=&#34;627&#34;
+	srcset=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/1_hu_a2abbb3d972c630f.jpg 480w, http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/1_hu_92919d1d05f0c330.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;料金&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;185&#34;
+		data-flex-basis=&#34;446px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;参考 :　&lt;a class=&#34;link&#34; href=&#34;https://sns.xserver.ne.jp/misskey.php&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;XserverのMisskey料金ページ&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;サーバーについてはXserverや自宅サーバーを組んで解決したものとして次のステップから解説を続けます。&lt;/p&gt;
+&lt;p&gt;参考 : 　&lt;a class=&#34;link&#34; href=&#34;https://blog.bokukoha.dev/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;3万円で作る自宅サーバー&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;ドメインは&lt;code&gt;.dev&lt;/code&gt;で年間2000円くらいです。別に持ってて損するわけでもないし、せっかく外部公開するならドメインは合った方が良いという話。&lt;/p&gt;
+&lt;h2 id=&#34;git-docker-cloudflaredとかのインストール&#34;&gt;Git, Docker, Cloudflaredとかのインストール
+&lt;/h2&gt;&lt;p&gt;何をどう頑張っても必要になるのでインストールします。尚、インストールコマンドなどは前提にあるようにUbuntu基準で記述するので、各自の環境に合わせてください。&lt;/p&gt;
+&lt;p&gt;GitもDockerもCloudflaredも、全部WindowsからLinuxまで広く対応しているので、導入はできるはずです。&lt;/p&gt;
+&lt;h3 id=&#34;gitのインストール&#34;&gt;Gitのインストール
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt -y install git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;を実行してgitをインストールします。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;で、バージョンが出力されることを一応確認してください。&lt;/p&gt;
+&lt;h3 id=&#34;dockerのインストール&#34;&gt;Dockerのインストール
+&lt;/h3&gt;&lt;p&gt;Dockerのインストールに必要なパッケージをインストールします。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install -y ca-certificates curl gnupg lsb-release
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Docker公式のリポジトリを追加します。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fsSL&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;https&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;download&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;docker&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;com&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;linux&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ubuntu&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gpg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gpg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dearmor&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;o&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;usr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;share&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;keyrings&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;docker&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;archive&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;keyring&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gpg&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tee&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;etc&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;apt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sources&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;docker&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;list&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dev&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;null&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Docker EngineとDocker CLIをインストールします。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install -y docker-ce docker-ce-cli containerd.io
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Dockerがインストールされているか確認します。出力が得られればOK。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo docker --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Docker Composeをインストールします。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;DOCKER_COMPOSE_VERSION&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;https&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;api&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;github&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;com&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;repos&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;docker&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compose&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;releases&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;latest&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;grep&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;tag_name&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cut&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#34;&amp;#39;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;sudo&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;curl&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;L&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;o&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;usr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;local&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;bin&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;docker&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compose&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;スクリプトの実行権限を付与します。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo chmod +x /usr/local/bin/docker-compose
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Docker composeのインストールを確認します。こちらも出力が得られればOK。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker-compose --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;cloudflaredのインストール&#34;&gt;Cloudflaredのインストール
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://one.dash.cloudflare.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Cloudflareのダッシュボード&lt;/a&gt;にアクセスし、ネットワーク&amp;gt;Tunnelsから、トンネルを作成します。&lt;/p&gt;
+&lt;p&gt;環境の選択から、今回の場合はUbuntuなのでDebianの64bitを選択し、下に表示されたコマンドをコピペして実行します。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/3.jpg&#34;
+	width=&#34;852&#34;
+	height=&#34;221&#34;
+	srcset=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/3_hu_8a489f3821a94adf.jpg 480w, http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/3_hu_e1d6926405eab1ac.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;385&#34;
+		data-flex-basis=&#34;925px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/8.jpg&#34;
+	width=&#34;738&#34;
+	height=&#34;190&#34;
+	srcset=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/8_hu_60a0e94721ae4d48.jpg 480w, http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/8_hu_abcf8836f9ff8d15.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;これをコピペすればOK。黒塗りの部分はトークンなので各自異なっているはず。&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;388&#34;
+		data-flex-basis=&#34;932px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;cloudflare-tunnelの作成&#34;&gt;Cloudflare tunnelの作成
+&lt;/h2&gt;&lt;p&gt;パブリックホスト名タブから、「追加する」をクリックします。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/4.jpg&#34;
+	width=&#34;471&#34;
+	height=&#34;167&#34;
+	srcset=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/4_hu_6c34c9e3d3103d2f.jpg 480w, http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/4_hu_c114349fd2f3ac11.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;282&#34;
+		data-flex-basis=&#34;676px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;サブドメイン、ドメインに自分が決めたドメインを入力します。サービスのタイプはHTTP、URLはdockerを実行しているサーバーのローカルIPアドレス（例: 192.168.1.100など）にmisskeyのポートを指定したものを入力します。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/5.jpg&#34;
+	width=&#34;1394&#34;
+	height=&#34;260&#34;
+	srcset=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/5_hu_2040876c6b12c463.jpg 480w, http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/5_hu_46ea341fe7c8aee.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;536&#34;
+		data-flex-basis=&#34;1286px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;デフォルトだとmisskeyのポートは3000なので、ローカルIPが&lt;code&gt;192.168.1.100&lt;/code&gt;なら、URLには&lt;code&gt;192.168.1.100:3000&lt;/code&gt;と入力すればOK。&lt;/p&gt;
+&lt;h2 id=&#34;misskeyのリポジトリ取得&#34;&gt;Misskeyのリポジトリ取得
+&lt;/h2&gt;&lt;p&gt;いよいよMisskey本体のインストール作業です。rootディレクトリなど、misskeyのフォルダを置いておきたいディレクトリ内で実行してください。デフォルトだとログインしているユーザーのフォルダ内のはず。&lt;/p&gt;
+&lt;p&gt;以下コマンドでgithubからリポジトリを取得し、中身が間違っていないか確認します。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone -b master https://github.com/misskey-dev/misskey.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cd misskey
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git checkout master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;configいじり&#34;&gt;Configいじり
+&lt;/h2&gt;&lt;p&gt;これらを実行し、各種初期設定ファイルのサンプルを本番用としてコピーします。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp .config/docker_example.yml .config/default.yml
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp .config/docker_example.env .config/docker.env
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cp ./compose_example.yml ./compose.yml
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;./misskey/.config&lt;/code&gt;内で&lt;code&gt;default.yml&lt;/code&gt;と必要に応じて&lt;code&gt;docker.env&lt;/code&gt;を編集します。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;default.yml&lt;/code&gt;内で絶対に変更する箇所&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;恐らく一番上にあるであろう&lt;code&gt;url:&lt;/code&gt;の部分。ここは、自分が建てるmisskeyサーバーのURLを入力してください。最終的に公開するURLを&lt;code&gt;misskey.example.com&lt;/code&gt;にするなら、以下のようになるはず。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Final accessible URL seen by a user.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# You can set url from an environment variable instead.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;https&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;misskey&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;example&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;com&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;docker.env&lt;/code&gt;の編集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基本的にここでいじる可能性があるのは、データベースの名前、ユーザー名とパスワードだと思います。&lt;/p&gt;
+&lt;p&gt;Misskeyを動かすだけなら編集は必須ではありませんが、いずれかを変更した場合は&lt;code&gt;default.yml&lt;/code&gt;内、以下例の&lt;code&gt;Database&lt;/code&gt;から始まる三要素を&lt;code&gt;docker.env&lt;/code&gt;の内容に合わせることを忘れないでください。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;# Database name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;# You can set db from an environment variable instead.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;db&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DatabaseName&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;# Auth&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;# You can set user and pass from environment variables instead.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;user&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DatabaseUser&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;pass&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DatabasePassword&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;dockerコンテナの準備&#34;&gt;Dockerコンテナの準備
+&lt;/h2&gt;&lt;p&gt;下記コマンドを実行してMisskeyのビルドとデータベースの初期化をします。5分くらいかかるので、お手洗いにでも行きましょう。筆者は&lt;code&gt;docker.env&lt;/code&gt;と&lt;code&gt;config.yml&lt;/code&gt;の内容を合わせるのを忘れて、ここでエラーが起きました。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo docker compose build
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo docker compose run --rm web pnpm run init
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上記作業が終わったことが確認出来たら、次のコマンドでMisskeyを実行できます。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo docker compose up -d
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;configで設定したアドレス、もといCloudflare tunnelで設定したアドレス（例 : &lt;code&gt;misskey.example.com&lt;/code&gt;）に接続して初期設定画面が表示されることを確認しましょう。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/2.jpg&#34;
+	width=&#34;635&#34;
+	height=&#34;581&#34;
+	srcset=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/2_hu_f8b5f5ea7d14bd44.jpg 480w, http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/2_hu_7a810a031fc2d504.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;こんな感じの画面が出たらOK&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;109&#34;
+		data-flex-basis=&#34;262px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;今回は初期設定開始用パスワードは特に設定していないので、空白のまま管理用アカウントのユーザー名とパスワードを新規作成してあげればOKです。&lt;/p&gt;
+&lt;h2 id=&#34;初期設定&#34;&gt;初期設定
+&lt;/h2&gt;&lt;p&gt;管理者用アカウントやロール設定については調べて解決してくれとしかいうことがないので置いておきます。ここでは、Docker環境でMisskeyを実行することによって起きるエラーの解決方法を備忘録として載せておきます。&lt;/p&gt;
+&lt;p&gt;それと、その他の初期設定について役立ちそうなことも載せておきます。&lt;/p&gt;
+&lt;h3 id=&#34;エラー内容&#34;&gt;エラー内容
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/6.jpg&#34;
+	width=&#34;479&#34;
+	height=&#34;252&#34;
+	srcset=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/6_hu_73ff227955198034.jpg 480w, http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/6_hu_6979ac97a4447c79.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;190&#34;
+		data-flex-basis=&#34;456px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;こんな感じで、アイコンやバナー、通常ノートで画像をMisskeyにアップロードしようとすると&lt;code&gt;INTERNAL_ERROR&lt;/code&gt;が起きてしまう問題を解決します。&lt;/p&gt;
+&lt;p&gt;このエラーの原因はDockerのコンテナが、コンテナ外の./misskey/filesにアクセスする権限がないせいで起きるものなので、フォルダへのアクセス権限を与えてやれば解決します。&lt;/p&gt;
+&lt;p&gt;misskeyディレクトリ内、Dockerコンテナ外で以下コマンドを実行するだけでOKです。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chown -hR 991.991 ./files
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;サーバーのアイコンとか&#34;&gt;サーバーのアイコンとか
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/7.jpg&#34;
+	width=&#34;260&#34;
+	height=&#34;158&#34;
+	srcset=&#34;http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/7_hu_8a8189d7c151f7ad.jpg 480w, http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/7_hu_6e97ebde4ed8d179.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;164&#34;
+		data-flex-basis=&#34;394px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;基本的にコントロールパネル&amp;gt;ブランディングから変更できます。ローカルの画像からパス指定ではなく、URLで画像を指定しなくてはいけないので、画像の直リンクが必要になります。&lt;/p&gt;
+&lt;p&gt;僕は、Google Photoにアップロードした画像をシェアリンクから直リンクに&lt;a class=&#34;link&#34; href=&#34;https://www.labnol.org/embed/google/photos&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;変えてくれるサイト&lt;/a&gt;を使ってURLを作成し、それをブランディング欄では使いました。&lt;/p&gt;
+&lt;p&gt;サイズみたいな注意事項はMisskey側で書いてくれているので、それに従っておけば間違いないです。&lt;/p&gt;
+&lt;h2 id=&#34;おわりに&#34;&gt;おわりに
+&lt;/h2&gt;&lt;p&gt;あとやることと言えば照会からフォローしたい人の@ユーザー名@ホストサーバー名を入れてフォローするだけなので、特に解説することはないと思います。とにかくDockerで作るのがあまりにも簡単すぎるので、そのうち全部ローカルで構築してみたいなあとは思ったりしています。&lt;/p&gt;
+&lt;p&gt;できるだけわかりやすく書いたつもりですが、結局のところ自分用の文章なのでわかり辛いところがあると思います。もしこの記事を読んでMisskeyの自インスタンスの作成にチャレンジする方がいれば、わからないことは是非質問してください。わかる範囲で頑張って答えます。では、またいつか👋&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bokukoha.dev/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;連絡先など&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Hirunomi</title>
+        <link>http://localhost:1313/p/hirunomi/</link>
+        <pubDate>Fri, 14 Mar 2025 12:21:21 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/hirunomi/</guid>
+        <description>&lt;img src="http://localhost:1313/main.jpg" alt="Featured image of post Hirunomi" /&gt;&lt;h2 id=&#34;heading&#34;&gt;heading
+&lt;/h2&gt;</description>
+        </item>
+        <item>
         <title>3万円くらいで作る自宅サーバー</title>
         <link>http://localhost:1313/p/3%E4%B8%87%E5%86%86%E3%81%8F%E3%82%89%E3%81%84%E3%81%A7%E4%BD%9C%E3%82%8B%E8%87%AA%E5%AE%85%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/</link>
         <pubDate>Sat, 22 Feb 2025 05:10:14 +0000</pubDate>

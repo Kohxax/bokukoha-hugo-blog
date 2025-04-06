@@ -36,7 +36,7 @@ params:
 
     sidebar:
         emoji:
-        subtitle: A Japanese student.
+        subtitle: 日本で一般大学生をやっています
         avatar:
             enabled: true
             local: true
