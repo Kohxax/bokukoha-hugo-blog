@@ -1,7 +1,7 @@
 ---
 title: 'スタレのスシローコラボ行ってきた'
 date: 2025-04-27T12:32:08Z
-draft: true
+draft: false
 image: 'main.jpg'
 categories:
   - 雑記
