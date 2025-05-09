@@ -166,10 +166,10 @@ params:
 
     colorScheme:
         # Display toggle
-        toggle: true
+        toggle: false
 
         # Available values: auto, light, dark
-        default: auto
+        default: dark
 
     imageProcessing:
         cover:
@@ -200,7 +200,7 @@ menu:
           name: Misskey
           url: https://misskey.io/@bokukoha
           params:
-              icon: misskey
+              icon: 
               
 
 related:
