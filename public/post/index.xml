@@ -1,13 +1,126 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on Koha Blog</title>
+        <title>Posts on こは雑記帳</title>
         <link>http://localhost:1313/post/</link>
-        <description>Recent content in Posts on Koha Blog</description>
+        <description>Recent content in Posts on こは雑記帳</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <copyright>Koha</copyright>
-        <lastBuildDate>Sun, 27 Apr 2025 12:32:08 +0000</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 09 May 2025 06:48:47 +0000</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Nuxt Contentでブログもどきを作ってみた</title>
+        <link>http://localhost:1313/p/nuxt-content%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%82%E3%81%A9%E3%81%8D%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/</link>
+        <pubDate>Fri, 09 May 2025 06:48:47 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/nuxt-content%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%82%E3%81%A9%E3%81%8D%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/</guid>
+        <description>&lt;img src="http://localhost:1313/p/nuxt-content%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%82%E3%81%A9%E3%81%8D%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/main.jpg" alt="Featured image of post Nuxt Contentでブログもどきを作ってみた" /&gt;&lt;h2 id=&#34;できた&#34;&gt;できた
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/nuxt-content%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%82%E3%81%A9%E3%81%8D%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/1.jpg&#34;
+	width=&#34;1533&#34;
+	height=&#34;687&#34;
+	srcset=&#34;http://localhost:1313/p/nuxt-content%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%82%E3%81%A9%E3%81%8D%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/1_hu_54e859dccfe63ee9.jpg 480w, http://localhost:1313/p/nuxt-content%E3%81%A7%E3%83%96%E3%83%AD%E3%82%B0%E3%82%82%E3%81%A9%E3%81%8D%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%81%9F/1_hu_46f382273c531b3f.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;完成形&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;223&#34;
+		data-flex-basis=&#34;535px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/Kohxax/bokukoha-novel&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHubのリポジトリ&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;なんで作ったのか&#34;&gt;なんで作ったのか
+&lt;/h2&gt;&lt;p&gt;作ってみたかったからです。というのはあまりにも味気ないので、理由らしい理由を書こうと思います。&lt;/p&gt;
+&lt;p&gt;もともとブログを作ろうというのはずーっと前から考えていたんですが、今皆さんが読んでくれているこのサイトを、思ったよりも楽にそして良いデザインで構築することができたので、わざわざ自作をする必要がなくなりました。&lt;/p&gt;
+&lt;p&gt;ですが、「やっぱ自作してぇ～～～」という気持ちが止まらなかったので、別にこちらと内容を分けるわけではないですが、遊びがてら作ることにしました。&lt;/p&gt;
+&lt;p&gt;それと、当初は僕がオタクをしているコンテンツのキャラ妄想みたいなのを適当に投げるサイトを作るという構想だったんですが、やってるうちに「雑記帳で良くね？これ」となり結局ブログ（その2）が作られることになってしまいました。&lt;/p&gt;
+&lt;h2 id=&#34;使ったもの&#34;&gt;使ったもの
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Nuxt&lt;/li&gt;
+&lt;li&gt;Nuxt Content&lt;/li&gt;
+&lt;li&gt;Tailwind CSS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基本この三種類です。開発鯖はProxmoxのLXCで適当に立ててやりました。以前プロフサイトを作るときにVueを使ったので、少しだけとはいえ見慣れてるものを使おうってことでNuxtを触ってみました。&lt;/p&gt;
+&lt;p&gt;最終的に作るものが静的サイトなのだから、このブログで使われてるHugoのような静的サイトジェネレータを使えばいいだろって話なんですが、自分で1から作ってみるのも楽しそうだったので…&lt;/p&gt;
+&lt;p&gt;他に比べる対象がないのでなんともですが、Nuxtのドキュメントは割とわかりやすいなと感じました。JavaScriptやTypeScriptの知識ほぼ0の僕のような人でも一応形は作れたので。&lt;/p&gt;
+&lt;h2 id=&#34;機能とか&#34;&gt;機能とか
+&lt;/h2&gt;&lt;p&gt;Nuxt Contentは、Contentの名の通りMarkdownからページを生成してくれる優れものです。Nuxtのルーティング機能なんかを使ってあげれば、4行程度のTypeScriptのコードと.vueファイルの中身を少し書くだけで動くブログが作れます。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;setup&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;slug&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;useRoute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;params&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;slug&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;post&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;useAsyncData&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;slug&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;queryCollection&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;content&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/$&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;slug&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;first&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;})&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;Markdownの内容を表示するページ本体のTSのコードです。マジでこれだけです。root/content内部の.md等のファイルを持ってきて、&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{{ post.title }}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{{ post.description }}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{{ post.date }}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;ContentRenderer :value=&amp;#34;post&amp;#34; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;一部configで設定が必要なものもありますが、こういうのを.vue内に記述してあげるだけでタイトルや本文なんかを表示してくれます。めっちゃ便利だけど、TSやJSの知識がマジでないせいで僕は理解にかなり時間がかかりました。&lt;/p&gt;
+&lt;p&gt;タグやカテゴリ分けも頑張れば実装できるんですが、雑記帳に機能はいらんだろ…ってことで放置してます。&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;面倒なわけではない&lt;/small&gt;&lt;/p&gt;
+&lt;h2 id=&#34;見た目&#34;&gt;見た目
+&lt;/h2&gt;&lt;p&gt;このブログやプロフサイトに色味をめっちゃ寄せてます。僕自身ダークモードが好きなのと、目にやさしい感じで黒過ぎないのがお気に入りかな。&lt;/p&gt;
+&lt;p&gt;UIとかの見た目作りはTailwind CSSでやりました。
+知り合いのお兄さんに猛烈なTailwindアンチがいたので今まで使っていなかったんですが、Tailwind便利すぎ！！もうTailwind信者になります。&lt;/p&gt;
+&lt;p&gt;とにかく、この手の技術系のものってネットの情報量が正義だと思ってる節があります。Tailwindくんは流石人気なだけあって、少し調べれば大概のことは解決するしUIコンポーネントなんかも一杯転がってて助かりました。&lt;/p&gt;
+&lt;p&gt;あとはTailwindくんのプラグインで導入できる&lt;code&gt;Prose&lt;/code&gt;というクラスが文章載せるサイト作るときにすっごく便利。ヘッダーや本文なんかを自動で判別して見やすいように整えてくれます。Nuxt Contentなら記事部分はarticleタグで囲うことになるんですが、その場合は&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;article class=&amp;#34;prose&amp;#34;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &amp;lt;ContentRenderer :value=&amp;#34;post&amp;#34; /&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;/article&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;これでOK。マジでこれだけで文字の大きさとかが自動で調節されます。便利すぎた。&lt;/p&gt;
+&lt;h2 id=&#34;総括&#34;&gt;総括
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;難しかったこと&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;contentからページ表示させるのがマジでわからなくて詰まった&lt;/li&gt;
+&lt;li&gt;slugの仕様がNuxt2と3で結構変わっていて、めっちゃ詰まった&lt;/li&gt;
+&lt;li&gt;Tailwindの導入方法がこれまた結構変わっていた&lt;/li&gt;
+&lt;li&gt;post.dateの表示方法が一生わからんかった&lt;/li&gt;
+&lt;li&gt;Google PageSpeed Insightsのスコア上がらん&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;わかったこと&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Nuxtちょっとわかるようになった&lt;/li&gt;
+&lt;li&gt;ドキュメントはちゃんと読もう&lt;/li&gt;
+&lt;li&gt;post.dateの表示方法はもうちょい分かりやすくしてくれていいと思う&lt;/li&gt;
+&lt;li&gt;世のWeb開発者の皆様はすごい&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;では、機会があればまた次回👋&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>スタレのスシローコラボ行ってきた</title>
         <link>http://localhost:1313/p/%E3%82%B9%E3%82%BF%E3%83%AC%E3%81%AE%E3%82%B9%E3%82%B7%E3%83%AD%E3%83%BC%E3%82%B3%E3%83%A9%E3%83%9C%E8%A1%8C%E3%81%A3%E3%81%A6%E3%81%8D%E3%81%9F/</link>
         <pubDate>Sun, 27 Apr 2025 12:32:08 +0000</pubDate>
