@@ -1,7 +1,7 @@
 ---
 title: 'HugoでのCloudflare Pagesのビルド失敗を回避する方法'
 date: 2025-05-11T02:17:20Z
-draft: true
+draft: false
 image: 'main.jpg'
 categories:
   - 技術系
