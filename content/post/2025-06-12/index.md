@@ -1,7 +1,7 @@
 ---
 title: '先週は色々あったよ日記'
 date: 2025-06-12T02:58:26Z
-draft: true
+draft: false
 image: 'main.jpg'
 categories:
   - 雑記
