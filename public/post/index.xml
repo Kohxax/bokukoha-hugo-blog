@@ -7,7 +7,73 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <copyright>Koha</copyright>
-        <lastBuildDate>Sat, 10 May 2025 10:52:50 +0000</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 12 Jun 2025 02:58:26 +0000</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2025 06 12</title>
+        <link>http://localhost:1313/p/2025-06-12/</link>
+        <pubDate>Thu, 12 Jun 2025 02:58:26 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/2025-06-12/</guid>
+        <description>&lt;img src="http://localhost:1313/main.jpg" alt="Featured image of post 2025 06 12" /&gt;&lt;h2 id=&#34;heading&#34;&gt;heading
+&lt;/h2&gt;</description>
+        </item>
+        <item>
+        <title>HugoでのCloudflare Pagesのビルド失敗を回避する方法</title>
+        <link>http://localhost:1313/p/hugo%E3%81%A7%E3%81%AEcloudflare-pages%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E5%A4%B1%E6%95%97%E3%82%92%E5%9B%9E%E9%81%BF%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Sun, 11 May 2025 02:17:20 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/hugo%E3%81%A7%E3%81%AEcloudflare-pages%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E5%A4%B1%E6%95%97%E3%82%92%E5%9B%9E%E9%81%BF%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hugo%E3%81%A7%E3%81%AEcloudflare-pages%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E5%A4%B1%E6%95%97%E3%82%92%E5%9B%9E%E9%81%BF%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/main.jpg" alt="Featured image of post HugoでのCloudflare Pagesのビルド失敗を回避する方法" /&gt;&lt;h2 id=&#34;概要&#34;&gt;概要
+&lt;/h2&gt;&lt;p&gt;以前の記事で書きましたが、このブログサイトはCloudflare Pagesでビルドとデプロイをしています。Cloudflare Pagesくんは、とても便利ではあるのですが、ページ内のコンテンツ（主に画像）が増えてビルドが30秒以内に終わらなくなると、&lt;code&gt;Error: error building site: render: failed to render pages&lt;/code&gt;, &lt;code&gt;partial &amp;quot;head/head.html&amp;quot; timed out after 30s. This is most likely due to infinite recursion.&lt;/code&gt;などの文言と共にビルドが失敗するようになります。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/hugo%E3%81%A7%E3%81%AEcloudflare-pages%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E5%A4%B1%E6%95%97%E3%82%92%E5%9B%9E%E9%81%BF%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/error.jpg&#34;
+	width=&#34;1131&#34;
+	height=&#34;214&#34;
+	srcset=&#34;http://localhost:1313/p/hugo%E3%81%A7%E3%81%AEcloudflare-pages%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E5%A4%B1%E6%95%97%E3%82%92%E5%9B%9E%E9%81%BF%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/error_hu_b388e2b06ee8dedb.jpg 480w, http://localhost:1313/p/hugo%E3%81%A7%E3%81%AEcloudflare-pages%E3%81%AE%E3%83%93%E3%83%AB%E3%83%89%E5%A4%B1%E6%95%97%E3%82%92%E5%9B%9E%E9%81%BF%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/error_hu_8be4ac411ab3751c.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ビルドに30秒以上かかって失敗している&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;528&#34;
+		data-flex-basis=&#34;1268px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;このままでは困るので、Hugo製のサイトならどのテーマでも使える解決方法でサクっと解決します。&lt;/p&gt;
+&lt;h2 id=&#34;方法&#34;&gt;方法
+&lt;/h2&gt;&lt;p&gt;Hugoプロジェクトディレクトリにある&lt;code&gt;config.yaml&lt;/code&gt;や&lt;code&gt;hugo.toml&lt;/code&gt;など、任意のconfigファイルがあると思います。
+yamlやtomlの書き方に従って、ファイル内に&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;timeout: 120s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;といった記述を追加してあげるだけでOKです。何も記述していないとtimeoutはデフォルトの30秒が適用されます。ここでは一時的に2分にしてますが、もっとビルドに時間がかかるようなら伸ばしてあげてください。&lt;/p&gt;
+&lt;details&gt;
+&lt;summary&gt;例: このブログのconfig.yaml（github参照）&lt;/summary&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;baseurl: https://blog.bokukoha.dev/
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;languageCode: ja
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;theme: hugo-theme-stack
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;title: こは雑記帳
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;copyright: Koha
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;timeout: 120s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/details&gt;</description>
+        </item>
+        <item>
         <title>オタクはバカ散歩をしろ！</title>
         <link>http://localhost:1313/p/%E3%82%AA%E3%82%BF%E3%82%AF%E3%81%AF%E3%83%90%E3%82%AB%E6%95%A3%E6%AD%A9%E3%82%92%E3%81%97%E3%82%8D/</link>
         <pubDate>Sat, 10 May 2025 10:52:50 +0000</pubDate>
