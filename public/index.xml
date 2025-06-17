@@ -719,7 +719,8 @@ yamlやtomlの書き方に従って、ファイル内に&lt;/p&gt;
         <pubDate>Sun, 06 Apr 2025 09:19:35 +0000</pubDate>
         
         <guid>http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/</guid>
-        <description>&lt;img src="http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/main.jpg" alt="Featured image of post Cloudflare tunnelで作るMisskey自鯖" /&gt;&lt;h2 id=&#34;概要&#34;&gt;概要
+        <description>&lt;img src="http://localhost:1313/p/cloudflare-tunnel%E3%81%A7%E4%BD%9C%E3%82%8Bmisskey%E8%87%AA%E9%AF%96/main.jpg" alt="Featured image of post Cloudflare tunnelで作るMisskey自鯖" /&gt;&lt;p&gt;※この記事は一部内容が古い可能性があります。&lt;/p&gt;
+&lt;h2 id=&#34;概要&#34;&gt;概要
 &lt;/h2&gt;&lt;p&gt;タイトル通りです。言っちゃえばMisskey公式ドキュメントの&lt;a class=&#34;link&#34; href=&#34;https://misskey-hub.net/ja/docs/for-admin/install/guides/docker/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;「Docker Composeを使ったMisskey構築」のページ&lt;/a&gt;をなぞりつつ、僕が詰まった箇所を少し解説するだけなので、公式ドキュメントを読める人はこの記事を読む必要はないと思います。自鯖を動かすうえで絶対に必要な部分だけを解説します。&lt;/p&gt;
 &lt;p&gt;外部公開にはCloudflare tunnelを使います。公式ドキュメントではNginxを使っているはずだからそこだけ異なってるかも。&lt;/p&gt;

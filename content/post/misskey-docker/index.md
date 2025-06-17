@@ -10,6 +10,9 @@ tags:
   - Docker
 ---
 
+※この記事は一部内容が古い可能性があります。
+
+
 ## 概要
 
 タイトル通りです。言っちゃえばMisskey公式ドキュメントの[「Docker Composeを使ったMisskey構築」のページ](https://misskey-hub.net/ja/docs/for-admin/install/guides/docker/)をなぞりつつ、僕が詰まった箇所を少し解説するだけなので、公式ドキュメントを読める人はこの記事を読む必要はないと思います。自鯖を動かすうえで絶対に必要な部分だけを解説します。
