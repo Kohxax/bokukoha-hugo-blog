@@ -190,6 +190,7 @@ menu:
           url: /
           params:
               icon: home
+              newTab: false
               
         - identifier: github
           name: GitHub
@@ -207,7 +208,7 @@ menu:
           name: Misskey
           url: https://misskey.io/@bokukoha
           params:
-              icon: 
+              icon:
               
 
 related:
