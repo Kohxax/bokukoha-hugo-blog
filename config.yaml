@@ -167,10 +167,10 @@ params:
 
     colorScheme:
         # Display toggle
-        toggle: false
+        toggle: true
 
         # Available values: auto, light, dark
-        default: dark
+        default: auto
 
     imageProcessing:
         cover:
