@@ -37,7 +37,7 @@ params:
 
     sidebar:
         emoji:
-        subtitle: 日本で一般大学生をやっています
+        subtitle: お出かけログをはじめとする日記や、技術の挑戦記録用を投稿する雑記帳です。
         avatar:
             enabled: true
             local: true

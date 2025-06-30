@@ -2598,9 +2598,8 @@ rootディレクトリの&lt;code&gt;hugo.toml&lt;/code&gt;を削除し、新た
         
         <guid>http://localhost:1313/about/</guid>
         <description>&lt;h2 id=&#34;自己紹介&#34;&gt;自己紹介
-&lt;/h2&gt;&lt;p&gt;こはです。大学生をしています。趣味はゲームと散歩と飲酒と自宅サーバーです。&lt;br&gt;
-このブログでは他SNSに載せていないような詳しい日常のことや、技術系の挑戦について投稿します。&lt;/p&gt;
-&lt;p&gt;やっているゲームやハマっているジャンルなどの詳しいプロフィールは&lt;a class=&#34;link&#34; href=&#34;https://www.bokukoha.dev/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+&lt;/h2&gt;&lt;p&gt;こはです。日本で一般大学生をしています。趣味はゲームと散歩と飲酒と自宅サーバーです。
+やっているゲームやハマっているジャンルなどの詳しいプロフィールは&lt;a class=&#34;link&#34; href=&#34;https://www.bokukoha.dev/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;自鯖プロフサイト&lt;/a&gt;をご覧ください。&lt;/p&gt;
 &lt;p&gt;非情報系＆趣味で必要なコード書いたり鯖環境構築したりする程度の技術力なので、技術的な話はそんなに期待しないでください。&lt;/p&gt;
 &lt;h2 id=&#34;連絡先--sns-リスト&#34;&gt;連絡先 &amp;amp; SNS リスト
