@@ -1,7 +1,7 @@
 ---
 title: 'Hugo + Stackのブログにシェアボタン実装した'
 date: 2025-06-30T09:01:39Z
-draft: true
+draft: false
 image: 'main.jpg'
 categories:
   - 技術系
@@ -30,4 +30,46 @@ Hugoの公式ドキュメントによれば`./layouts`というディレクト�
 
 ## やり方
 
-`./layouts/partials`内に`social-share.html`を作成します。
+`./layouts/partials`内に`social-share.html`というコンポーネントを作成します。
+
+`social-share.html`内にボタンや文章など、シェアボタンの部分に必要なものをHTMLとCSSで書きます。HTMLやCSSの変更はページ更新ではなく、開発サーバーを再起動しないと適用されないので注意してください。
+
+### HTMLの読み込み
+作ったシェアボタンのコンポーネントを記事の方で読み込みます。
+
+`./themes/layouts/partials/article/article.html`を`./layouts/partials/article/`内にコピーします。上書きする方の`article.html`内の任意の場所に
+
+```
+{{ partial "social-share.html" . }}
+```
+という行を追加してください。このブログではfooterの下に追加しています。
+
+### アイコンの読み込み
+シェアボタンのアイコン部分の読み込みですが、これは`./assets/icons/hoge.svg`を読み込むようにするものとしています。svgファイルは[stackが使っているサイト](https://tabler.io/icons)などのアイコン配布サイトから拾ってきてもらうとして、実際にどうやってHTML内で書いて表示させるのかについて簡単に書きます。
+
+`./assets/hoge/hoge.svg`を読み込みたいときは、
+
+```
+{{ $hoge := resources.Get "hoge/hoge.svg"}}
+{{ $hoge.Content | safeHTML }}
+```
+
+のように書いてあげるだけでOKです。これをaタグで囲ってあげればアイコンが表示されます。
+
+### 調整
+CSSで頑張っていい感じに調整します。CSSがわからなくても、geminiやchatGPTにコードとスクショを投げれば割といい感じにしてくれると思います。
+
+分かりにくいのでいくとアイコンや文字の色の指定ですが、
+
+```
+var(--card-text-color-main);
+var(--card-text-color-secondary);
+```
+のような色要素をテーマから拾ってこれるので、CSSで色指定する時はこれらを`color`のあとにつけてあげればいい感じになります。ダークテーマでもライトテーマでも、Hugoのテーマ本来の設定された色に基づいて色が変わってくれるので便利。
+
+## おわり
+やってることとしては、追加したいコンポーネント作って、それを読み込むように既存のページ構成ファイルを上書きするだけなのでそこまで難易度は高くないですが、如何せん情報が少ないのでそこそこ時間がかかりました。
+
+ファイルパスなんかは基本的にこの記事に書いているので、前述の通りわからなくなったら[このブログのリポジトリ](https://github.com/Kohxax/bokukoha-hugo-blog)を見てみてください。多分わかると思います。
+
+ではまた次回👋
