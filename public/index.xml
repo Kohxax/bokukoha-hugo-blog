@@ -7,7 +7,39 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <copyright>Koha</copyright>
-        <lastBuildDate>Thu, 26 Jun 2025 09:32:11 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 30 Jun 2025 09:01:39 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Hugo &#43; Stackのブログにシェアボタン実装した</title>
+        <link>http://localhost:1313/p/hugo--stack%E3%81%AE%E3%83%96%E3%83%AD%E3%82%B0%E3%81%AB%E3%82%B7%E3%82%A7%E3%82%A2%E3%83%9C%E3%82%BF%E3%83%B3%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%9F/</link>
+        <pubDate>Mon, 30 Jun 2025 09:01:39 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/hugo--stack%E3%81%AE%E3%83%96%E3%83%AD%E3%82%B0%E3%81%AB%E3%82%B7%E3%82%A7%E3%82%A2%E3%83%9C%E3%82%BF%E3%83%B3%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%9F/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hugo--stack%E3%81%AE%E3%83%96%E3%83%AD%E3%82%B0%E3%81%AB%E3%82%B7%E3%82%A7%E3%82%A2%E3%83%9C%E3%82%BF%E3%83%B3%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%9F/main.jpg" alt="Featured image of post Hugo &#43; Stackのブログにシェアボタン実装した" /&gt;&lt;h2 id=&#34;概要&#34;&gt;概要
+&lt;/h2&gt;&lt;p&gt;タイトル通りです。このブログはHugo製で、Stackというテーマを適用して作っています。Stackテーマは改造等割と自由なので、試しにシェアボタンを実装してみるかと思いやってみました。&lt;/p&gt;
+&lt;p&gt;HTMLとCSSの知識、あとはHugoに関するドキュメントを調べる能力があれば行けると思います。今後色々追加する自分向けの備忘録として、この記事では簡単にやり方を書きます。Stackテーマに限らず、Hugo製ページの構造を少し理解していれば、どのテーマでも同じように改造ができると思うので、よければ参考にしてください。&lt;/p&gt;
+&lt;p&gt;step by stepのような解説ではなくあくまでメモなので、コードが気になる方は&lt;a class=&#34;link&#34; href=&#34;https://github.com/Kohxax/bokukoha-hugo-blog&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;このブログのリポジトリ&lt;/a&gt;を見てみてください。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/hugo--stack%E3%81%AE%E3%83%96%E3%83%AD%E3%82%B0%E3%81%AB%E3%82%B7%E3%82%A7%E3%82%A2%E3%83%9C%E3%82%BF%E3%83%B3%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%9F/1.jpg&#34;
+	width=&#34;236&#34;
+	height=&#34;99&#34;
+	srcset=&#34;http://localhost:1313/p/hugo--stack%E3%81%AE%E3%83%96%E3%83%AD%E3%82%B0%E3%81%AB%E3%82%B7%E3%82%A7%E3%82%A2%E3%83%9C%E3%82%BF%E3%83%B3%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%9F/1_hu_609576d8addd2114.jpg 480w, http://localhost:1313/p/hugo--stack%E3%81%AE%E3%83%96%E3%83%AD%E3%82%B0%E3%81%AB%E3%82%B7%E3%82%A7%E3%82%A2%E3%83%9C%E3%82%BF%E3%83%B3%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%9F/1_hu_30732194983ad576.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;完成形&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;238&#34;
+		data-flex-basis=&#34;572px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;前提知識&#34;&gt;前提知識
+&lt;/h2&gt;&lt;p&gt;Hugo、少なくともStackテーマでは、&lt;code&gt;./themes/layouts&lt;/code&gt;内にページやウィジェットなど各種ページを構成するパーツがまとめて入れられていて、そのパーツを&lt;code&gt;./themes/layouts/_default/single.html&lt;/code&gt;や&lt;code&gt;./themes/layouts/partials/article/article.html&lt;/code&gt;なんかで読み込んで実際のページを作るという感じの動作をしています。&lt;/p&gt;
+&lt;p&gt;Hugoの公式ドキュメントによれば&lt;code&gt;./layouts&lt;/code&gt;というディレクトリを作り、その中にthemes内と同じディレクトリ構造を作ってあげれば任意のパーツを上書きしたり、あるいは新しいパーツを追加して読み込むなんてことができるようになります。今回のシェアボタン追加は後者の方をやっていきます。&lt;/p&gt;
+&lt;h2 id=&#34;やり方&#34;&gt;やり方
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;./layouts/partials&lt;/code&gt;内に&lt;code&gt;social-share.html&lt;/code&gt;を作成します。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>無知オタク、AWS Summitに行く</title>
         <link>http://localhost:1313/p/%E7%84%A1%E7%9F%A5%E3%82%AA%E3%82%BF%E3%82%AFaws-summit%E3%81%AB%E8%A1%8C%E3%81%8F/</link>
         <pubDate>Thu, 26 Jun 2025 09:32:11 +0000</pubDate>
