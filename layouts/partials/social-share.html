@@ -9,7 +9,7 @@
         このページをシェア
     </span>
     <div class="share-buttons">
-        <a href="{{ $permalink }}" onclick="copyToClipboard('{{ $permalink }}')" title="リンクをコピー">
+        <a href="{{ $permalink }}" onclick="event.preventDefault(); navigator.clipboard.writeText(this.href);" title="リンクをコピー">
             {{ with resources.Get "icons/link.svg" }}{{ .Content | safeHTML }}{{ end }}
         </a>
 
