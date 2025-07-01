@@ -61,7 +61,7 @@
         const apiKey = '{{ site.Params.apiKey }}';
         const articleId = '{{ .RelPermalink }}';
         
-        const LIKE_LIMIT = 200;
+        const LIKE_LIMIT = 10;
         const userLikeCountKey = `user_like_count_${articleId}`;
 
         const likeButton = document.getElementById('like-button');
