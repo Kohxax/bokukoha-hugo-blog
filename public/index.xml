@@ -33,7 +33,7 @@
 	
 &gt;&lt;/p&gt;
 &lt;h2 id=&#34;前提知識&#34;&gt;前提知識
-&lt;/h2&gt;&lt;p&gt;Hugo、少なくともStackテーマでは、&lt;code&gt;./themes/layouts&lt;/code&gt;内にページやウィジェットなど各種ページを構成するパーツがまとめて入れられていて、そのパーツを&lt;code&gt;./themes/layouts/_default/single.html&lt;/code&gt;や&lt;code&gt;./themes/layouts/partials/article/article.html&lt;/code&gt;なんかで読み込んで実際のページを作るという感じの動作をしています。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;Hugo、少なくともStackテーマでは、&lt;code&gt;./themes/layouts&lt;/code&gt;内にウィジェットなど各種ページを構成するパーツがまとめて入れられていて、そのパーツを&lt;code&gt;./themes/layouts/_default/single.html&lt;/code&gt;や&lt;code&gt;./themes/layouts/partials/article/article.html&lt;/code&gt;なんかで読み込んで実際のページを作るという感じの動作をしています。&lt;/p&gt;
 &lt;p&gt;Hugoの公式ドキュメントによれば&lt;code&gt;./layouts&lt;/code&gt;というディレクトリを作り、その中にthemes内と同じディレクトリ構造を作ってあげれば任意のパーツを上書きしたり、あるいは新しいパーツを追加して読み込むなんてことができるようになります。今回のシェアボタン追加は後者の方をやっていきます。&lt;/p&gt;
 &lt;h2 id=&#34;やり方&#34;&gt;やり方
 &lt;/h2&gt;&lt;p&gt;&lt;code&gt;./layouts/partials&lt;/code&gt;内に&lt;code&gt;social-share.html&lt;/code&gt;というコンポーネントを作成します。&lt;/p&gt;

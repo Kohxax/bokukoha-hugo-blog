@@ -24,7 +24,7 @@ step by stepのような解説ではなくあくまでメモなので、コー�
 
 ## 前提知識
 
-Hugo、少なくともStackテーマでは、`./themes/layouts`内にページやウィジェットなど各種ページを構成するパーツがまとめて入れられていて、そのパーツを`./themes/layouts/_default/single.html`や`./themes/layouts/partials/article/article.html`なんかで読み込んで実際のページを作るという感じの動作をしています。
+Hugo、少なくともStackテーマでは、`./themes/layouts`内にウィジェットなど各種ページを構成するパーツがまとめて入れられていて、そのパーツを`./themes/layouts/_default/single.html`や`./themes/layouts/partials/article/article.html`なんかで読み込んで実際のページを作るという感じの動作をしています。
 
 Hugoの公式ドキュメントによれば`./layouts`というディレクトリを作り、その中にthemes内と同じディレクトリ構造を作ってあげれば任意のパーツを上書きしたり、あるいは新しいパーツを追加して読み込むなんてことができるようになります。今回のシェアボタン追加は後者の方をやっていきます。
 
