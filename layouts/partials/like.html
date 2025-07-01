@@ -58,7 +58,6 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const apiEndpoint = '{{ site.Params.apiEndpoint }}';
-        const apiKey = '{{ site.Params.apiKey }}';
         const articleId = '{{ .RelPermalink }}';
         
         const LIKE_LIMIT = 10;
@@ -69,11 +68,11 @@
 
         if (!likeButton) return;
 
-        const requestHeaders = { 'x-api-key': apiKey };
-
-        fetch(`${apiEndpoint}/${encodeURIComponent(articleId)}`, { headers: requestHeaders })
+        fetch(`${apiEndpoint}/${encodeURIComponent(articleId)}`)
             .then(res => res.json())
-            .then(data => { likeCountSpan.textContent = data.likes || 0; })
+            .then(data => {
+                likeCountSpan.textContent = data.likes || 0;
+            })
             .catch(err => console.error('いいね数取得失敗:', err));
         
         const currentUserLikes = parseInt(localStorage.getItem(userLikeCountKey) || '0');
@@ -92,8 +91,7 @@
                 likeCountSpan.textContent = parseInt(likeCountSpan.textContent) + 1;
                 
                 fetch(`${apiEndpoint}/${encodeURIComponent(articleId)}`, {
-                    method: 'POST',
-                    headers: requestHeaders
+                    method: 'POST'
                 })
                 .then(res => res.json()).then(data => { likeCountSpan.textContent = data.likes; })
                 .catch(err => {
