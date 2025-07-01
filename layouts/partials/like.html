@@ -1,5 +1,5 @@
 <div class="like-container">
-    <button id="like-button" aria-label="いいねする">
+    <button id="like-button" title="いいね！">
         {{ with resources.Get "icons/heart.svg" }}{{ .Content | safeHTML }}{{ end }}
         <span id="like-count">0</span>
     </button>
@@ -13,7 +13,7 @@
 
     .like-text {
         display: block;
-        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
         color: var(--card-text-color-main);
         font-size: 1.4rem;
         font-weight: 400;
@@ -24,6 +24,7 @@
         border: 1px solid var(--card-border-color);
         border-radius: 20px;
         padding: 5px 15px;
+        padding-left: 35px;
         color: var(--card-text-color-main);
         cursor: pointer;
         display: inline-flex;
