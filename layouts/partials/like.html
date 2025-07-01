@@ -51,24 +51,38 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const apiEndpoint = 'https://wibryx04g3.execute-api.ap-northeast-1.amazonaws.com/v1/likes';
+        const apiEndpoint = '{{ site.Params.apiEndpoint }}';
+        const apiKey = '{{ site.Params.apiKey }}';
         const articleId = '{{ .RelPermalink }}';
-
+        
         const likeButton = document.getElementById('like-button');
         const likeCountSpan = document.getElementById('like-count');
 
         if (!likeButton) return;
 
-        fetch(`${apiEndpoint}/${encodeURIComponent(articleId)}`).then(res => res.json()).then(data => {
-            likeCountSpan.textContent = data.likes || 0;
-        }).catch(err => console.error('いいね数取得失敗:', err));
+        const requestHeaders = {
+            'x-api-key': apiKey
+        };
+
+        fetch(`${apiEndpoint}/${encodeURIComponent(articleId)}`, { headers: requestHeaders })
+            .then(res => res.json())
+            .then(data => {
+                likeCountSpan.textContent = data.likes || 0;
+            })
+            .catch(err => console.error('いいね数取得失敗:', err));
 
         likeButton.addEventListener('click', () => {
             likeCountSpan.textContent = parseInt(likeCountSpan.textContent) + 1;
-            fetch(`${apiEndpoint}/${encodeURIComponent(articleId)}`, { method: 'POST' })
-            .then(res => res.json()).then(data => {
+            
+            fetch(`${apiEndpoint}/${encodeURIComponent(articleId)}`, {
+                method: 'POST',
+                headers: requestHeaders
+            })
+            .then(res => res.json())
+            .then(data => {
                 likeCountSpan.textContent = data.likes;
-            }).catch(err => {
+            })
+            .catch(err => {
                 likeCountSpan.textContent = parseInt(likeCountSpan.textContent) - 1;
                 console.error('いいね送信失敗:', err);
             });
