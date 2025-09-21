@@ -178,7 +178,7 @@ params:
             enabled: true
     
     apiEndpoint: 'https://wibryx04g3.execute-api.ap-northeast-1.amazonaws.com/v1/likes'
-    apiKey: 'qhTdZfxHmo12KIuMG11ofaCN4wGoDy4m584u79PJ'
+    apiKey: 'LRIgILX2318oloHPV5gHd5IZsXgPCasW28TyGDJ5'
 
 ### Custom menu
 ### See https://stack.jimmycai.com/config/menu
