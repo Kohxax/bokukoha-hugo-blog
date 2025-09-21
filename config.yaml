@@ -53,14 +53,13 @@ params:
 
     comments:
         enabled: false
-        provider: disqus
-        disqusShortname: koha-blog
+        provider: disqusjs
 
         disqusjs:
             shortname: koha-blog
-            apiUrl: 
-            apiKey: 
-            admin:
+            apiUrl: https://disqus.com/api/
+            apiKey: jsg4XnGSeqKVQ7zgBPTAD1Ev61vCbDVvCKe2EWaOjMlwXqg57aYWIt8JNCSZJMdH
+            admin: disqus_BKHIrm0eFG
             adminLabel:
 
         utterances:
