@@ -7,7 +7,79 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>ja</language>
         <copyright>Koha</copyright>
-        <lastBuildDate>Sun, 21 Sep 2025 02:33:37 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 30 Sep 2025 16:08:24 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>自宅で動かすMinecraftサーバー</title>
+        <link>http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99minecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/</link>
+        <pubDate>Tue, 30 Sep 2025 16:08:24 +0000</pubDate>
+        
+        <guid>http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99minecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99minecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/main.jpg" alt="Featured image of post 自宅で動かすMinecraftサーバー" /&gt;&lt;h2 id=&#34;概要&#34;&gt;概要
+&lt;/h2&gt;&lt;p&gt;自宅に置いているサーバー機で動かしているサービスの中でも、一番リソースを食っているのはMinecraft関連です。紹介と自分の脳内整理を兼ねて、自宅サーバーで動かすマイクラサーバーの構成とかについてつらつらと書いていこうかなという感じ。ほぼ雑記的な内容です。&lt;/p&gt;
+&lt;h2 id=&#34;構成&#34;&gt;構成
+&lt;/h2&gt;&lt;p&gt;Proxmoxを入れた物理サーバー機を置き、そこに各種VMを建ててマイクラサーバーを動かしています。各種VMはこんな感じ。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;プロキシサーバー&lt;/strong&gt; &lt;br&gt;
+サーバーソフト : Velocity &lt;br&gt;
+役割 : プレイヤーのログイン処理、統合版プレイヤーの認証など&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;メインサーバー&lt;/strong&gt; &lt;br&gt;
+サーバーソフト : Paper &lt;br&gt;
+役割 : メインワールドとサブワールドの管理&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ロビーサーバー&lt;/strong&gt; &lt;br&gt;
+サーバーソフト : Paper &lt;br&gt;
+役割 : 作成予定。各種サーバーへのハブ的な感じにしたいけど、実用化するかは不明&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;テストサーバー&lt;/strong&gt; &lt;br&gt;
+サーバーソフト : Paper &lt;br&gt;
+役割 : プラグインのテスト、あとは負荷のテストに使う&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99minecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/1.jpg&#34;
+	width=&#34;713&#34;
+	height=&#34;434&#34;
+	srcset=&#34;http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99minecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/1_hu_20a93b360ec6ff31.jpg 480w, http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99minecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/1_hu_3b0de19eb0333680.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;図&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;164&#34;
+		data-flex-basis=&#34;394px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;ユーザーの通る順序としては、プロキシサーバー（認証、転送先の自動選択）→ロビーサーバー（予定、ログインワールドの選択予定？）→メインサーバー / テストサーバー（実際のプレイ部分）という感じ。&lt;/p&gt;
+&lt;p&gt;メインサーバーはMultiverse-core（以下mv-core）を利用して複数ワールドを一括管理しているのですが、本来ならそういった複数ワールドもサーバーを分けるというのがvelocityの使い方な気がします。まあ自分としてはメインサーバーが何かしらの原因でダウンする時は他のワールド含めてダウンして欲しい（モデレーション的な観点から）ので、この構成でもいいのかなと思ったり。Hypixelのような大規模サーバーではしっかりとサーバーが分けられているので流石だな～と思っています。&lt;/p&gt;
+&lt;h3 id=&#34;与太話&#34;&gt;与太話
+&lt;/h3&gt;&lt;p&gt;正直自宅で動かす同時接続数が10人行かないようなサーバーならVelocityを使わずVMは1台で何の問題もないと思います。自分がわざわざこういった構成にしているのは、マイクラサーバーに無差別ログインを試みるbotによるログ流しの対策であったり、単純に興味があったからという理由があるからです。&lt;/p&gt;
+&lt;p&gt;まあ、ログインを試行してくる外国人というのは基本的にホワイトリストで弾けるんですが、ハッククライアントを使って名前を偽装してログインを試みる人なんかもいて結構恐ろしかったりします。そこらへんもUUIDでちゃんと弾いてくれるmojangに感謝をしないといけない。&lt;/p&gt;
+&lt;h3 id=&#34;利点ももちろんある&#34;&gt;利点ももちろんある
+&lt;/h3&gt;&lt;p&gt;プロキシサーバーを建てていて助かったなと思ったのは、リアルつながりの友人とマイクラを一緒にやろうとなった時です。友人は僕がサーバーを動かせることを知っているので、基本的に僕がホストをすることになるんですが、通常のマイクラサーバーだと特定のプレイヤーだけを別ワールドに転送させてインベントリをメインと同期しないで～などなどの設定が面倒です。&lt;/p&gt;
+&lt;p&gt;プロキシサーバーはそこらへんがかなり楽ちんで、新しいワールドで友達とやりたいならProxmoxでVMを1台増やしてそこにマイクラサーバーを建てて、Velocityのコンフィグをちょろっと書き換えるだけでOKです。しかもみんなが飽きたらVMをオフにして無駄なリソースを消費しないようにできるのがいいなと思います。&lt;/p&gt;
+&lt;p&gt;前述の通りmv-coreやmv-inventoryを用いた複数ワールドの管理でも同じことは一応できると思います。しかし、友達が飽きたあとに、そのワールドだけ切り離してリソース削減をするためには、一旦サーバーをダウンさせて、ワールドフォルダを別ディレクトリに移動して……といった手順を踏む必要があります。飽きたらVMをオフにするだけ、またやるときはオンにするだけというプロキシサーバーを用いた管理に比べて、スマートではないですよね。&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;そしてこれらも、Dockerで管理したらもっとスマート（多分）&lt;/small&gt;&lt;/p&gt;
+&lt;h2 id=&#34;データ保護&#34;&gt;データ保護
+&lt;/h2&gt;&lt;p&gt;一番大事だと思います。うちのサーバーのワールドはかれこれ6年ほど続いているサバイバルワールドなので、これが消えてしまうとなるとかなり精神的にくるものがありそうです。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99minecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/2.jpg&#34;
+	width=&#34;1920&#34;
+	height=&#34;1080&#34;
+	srcset=&#34;http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99minecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/2_hu_eaadefca0aec69c1.jpg 480w, http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%81%A7%E5%8B%95%E3%81%8B%E3%81%99minecraft%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC/2_hu_ab06bc949d252cb9.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;オタクの壁など&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;以前は配布されているプラグインを使ってワールドが動いているのと同じVMにワールドとプレイヤーデータのバックアップを行っていました。しかし、サーバーを動かす中で停電を何度か経験したことで、もう少しバックアップの体制を強いものにしたいと考えるようになりました。特にうちのサーバー機はお金をかけずに組み立てたせいで、電源だったりSSDだったり色々と安いです。もちろん無停電電源装置なんて高級品もありません。&lt;/p&gt;
+&lt;p&gt;そこで色々考えた結果、バックアップを取ったものをクラウドストレージにアップロードするプラグインを自作すればいいんじゃないか！？ということになり作りました。→&lt;a class=&#34;link&#34; href=&#34;https://github.com/Kohxax/MCS3-Backup&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;MCS3-Backup&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;今のところ完全に自分用で作ってしまったので、githubにあるものは動くものではないのですが、そのうち一般向けに配布もしたいなと思います。これを作ったことでS3 glacierにバックアップが保存されるようになり、精神衛生上非常に良いです。満足。実際に停電でSSDがぶっ壊れたりするかどうかはさておき、そういった不安を解消できたというだけで作った価値はあると思っています。&lt;/p&gt;
+&lt;h2 id=&#34;おわり&#34;&gt;おわり
+&lt;/h2&gt;&lt;p&gt;正直もっと話したいことはあるんですが、恐らく読んでいる人の大半は興味がないことだと思うので割愛します。電気代と初期投資費用なんかを考えると、自宅サーバーでマイクラを24時間動かすのはやめといた方がいいです。&lt;/p&gt;
+&lt;p&gt;マイクラサーバーを建てる以外にも何か別のサービスを動かしたい（自分の場合はブログやその他webサービス、あとはmisskeyというSNS）みたいな場合を除けば、恐らく安めのVPS借りたほうが得すると思います。完全に趣味の領域なので全員やれとは言いませんが、興味があるならやってみて損はしないことを約束します！&lt;/p&gt;
+&lt;p&gt;ここまで読んでくれてありがとうございました。良ければいいねボタン押してください。ではまた次回👋&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Hugo &#43; StackのブログにAWSでいいねボタン実装した</title>
         <link>http://localhost:1313/p/hugo--stack%E3%81%AE%E3%83%96%E3%83%AD%E3%82%B0%E3%81%ABaws%E3%81%A7%E3%81%84%E3%81%84%E3%81%AD%E3%83%9C%E3%82%BF%E3%83%B3%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%9F/</link>
         <pubDate>Sun, 21 Sep 2025 02:33:37 +0000</pubDate>
@@ -1235,16 +1307,6 @@ yamlやtomlの書き方に従って、ファイル内に&lt;/p&gt;
 		data-flex-basis=&#34;180px&#34;
 	
 &gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>自宅マイクラサーバーは楽しいぞという話</title>
-        <link>http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%A9%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AF%E6%A5%BD%E3%81%97%E3%81%84%E3%81%9E%E3%81%A8%E3%81%84%E3%81%86%E8%A9%B1/</link>
-        <pubDate>Sat, 10 May 2025 09:51:17 +0000</pubDate>
-        
-        <guid>http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%A9%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AF%E6%A5%BD%E3%81%97%E3%81%84%E3%81%9E%E3%81%A8%E3%81%84%E3%81%86%E8%A9%B1/</guid>
-        <description>&lt;img src="http://localhost:1313/p/%E8%87%AA%E5%AE%85%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%A9%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%81%AF%E6%A5%BD%E3%81%97%E3%81%84%E3%81%9E%E3%81%A8%E3%81%84%E3%81%86%E8%A9%B1/main.jpg" alt="Featured image of post 自宅マイクラサーバーは楽しいぞという話" /&gt;&lt;h2 id=&#34;いいぞ&#34;&gt;いいぞ
-&lt;/h2&gt;&lt;p&gt;マイクラサーバーの構成と、難しかったこととかを書く&lt;/p&gt;
 </description>
         </item>
         <item>
