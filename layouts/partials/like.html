@@ -57,51 +57,66 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- 設定 ---
         const apiEndpoint = '{{ site.Params.apiEndpoint }}';
-        const apiKey = '{{ site.Params.apiKey }}'; // 設定ファイルからAPIキーを読み込む
+        const apiKey = '{{ site.Params.apiKey }}';
         const articleId = '{{ .RelPermalink }}';
-
+        
+        // ▼▼▼ いいね回数の上限をここで設定（1回にしたい場合は 1） ▼▼▼
+        const LIKE_LIMIT = 1;
+        
+        // --- HTML要素の取得 ---
         const likeButton = document.getElementById('like-button');
         const likeCountSpan = document.getElementById('like-count');
+        const userLikeCountKey = `user_like_count_${articleId}`;
 
         if (!likeButton) return;
 
-        // リクエストに含めるヘッダーを作成
-        const requestHeaders = {
-            'x-api-key': apiKey
-        };
+        const requestHeaders = { 'x-api-key': apiKey };
 
-        // ページ読み込み時のいいね数取得（ヘッダー付きでfetch）
+        // --- ページ読み込み時の処理 ---
+        // サーバーから合計いいね数を取得
         fetch(`${apiEndpoint}/${encodeURIComponent(articleId)}`, { headers: requestHeaders })
-            .then(res => {
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-                return res.json();
-            })
+            .then(res => res.json())
             .then(data => {
                 likeCountSpan.textContent = data.likes || 0;
             })
             .catch(err => console.error('いいね数取得失敗:', err));
+        
+        // ローカルストレージからこのブラウザでのいいね回数を取得し、上限に達していればボタンを無効化
+        const currentUserLikes = parseInt(localStorage.getItem(userLikeCountKey) || '0');
+        if (currentUserLikes >= LIKE_LIMIT) {
+            likeButton.disabled = true;
+            likeButton.classList.add('limit-reached'); // CSSクラスを適用
+        }
 
-        // ボタンクリック時の処理
+        // --- ボタンクリック時の処理 ---
         likeButton.addEventListener('click', () => {
-            likeCountSpan.textContent = parseInt(likeCountSpan.textContent) + 1;
+            let userLikes = parseInt(localStorage.getItem(userLikeCountKey) || '0');
 
-            // いいねを送信（ヘッダー付きでfetch）
-            fetch(`${apiEndpoint}/${encodeURIComponent(articleId)}`, {
-                method: 'POST',
-                headers: requestHeaders // ここにもヘッダーを追加
-            })
-            .then(res => {
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-                return res.json();
-            })
-            .then(data => {
-                likeCountSpan.textContent = data.likes;
-            })
-            .catch(err => {
-                likeCountSpan.textContent = parseInt(likeCountSpan.textContent) - 1;
-                console.error('いいね送信失敗:', err);
-            });
+            // まだ上限に達していなければ処理を実行
+            if (userLikes < LIKE_LIMIT) {
+                // ローカルストレージのカウントを+1して保存
+                userLikes++;
+                localStorage.setItem(userLikeCountKey, userLikes);
+                
+                // 画面のカウントを即座に+1
+                likeCountSpan.textContent = parseInt(likeCountSpan.textContent) + 1;
+                
+                // サーバーにいいねがあったことを通知
+                fetch(`${apiEndpoint}/${encodeURIComponent(articleId)}`, {
+                    method: 'POST',
+                    headers: requestHeaders
+                }).catch(err => {
+                    console.error('いいね送信失敗:', err);
+                });
+
+                // このクリックで上限に達したら、ボタンを無効化
+                if (userLikes >= LIKE_LIMIT) {
+                    likeButton.disabled = true;
+                    likeButton.classList.add('limit-reached');
+                }
+            }
         });
     });
 </script>
